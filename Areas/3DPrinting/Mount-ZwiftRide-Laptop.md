@@ -158,3 +158,21 @@ block length, width top (wide), width bottom (narrow), height, screw centre spac
 
 ## FINAL SETTLED GEOMETRY
 Base (dovetail pocket + 2 screws, reuse alu block) -> horizontal level arm ~150mm -> near-vertical telescoping height element w/ slight forward tip (~110-120mm, discrete holes) -> toothed tilt hinge (15deg steps) -> cradle: lower lip = 100mm datum, screen extends up, screen TOP tips away / face angles UP toward higher rider, lip+sliding retainer on rider-facing side, 2 rails. Width ~330mm (250-360 wide, 7-22 thick). ASA/PETG.
+
+
+## Script v2 written (2026-05-30)
+- File: zwift_ride_laptop_mount.py (presented to user). Syntax-checked OK (py_compile).
+- Built to settled geometry. 6 components: Base, Arm, HeightElement, TiltHinge, Cradle, TopRetainer.
+- All float dims published as Fusion user parameters (live-editable in Change Parameters).
+- Dovetail values STILL placeholders — Base not printable until 6 caliper numbers entered.
+
+### Known-fragile spots (wrapped in try/except, may need a tweak on first run)
+1. Hinge teeth via circularPatternFeatures — axis/quantity API varies by Fusion version. If teeth missing, get user's Fusion version + adjust.
+2. hole_y cuts use SymmetricExtentDirection enum — may differ by version.
+3. moveFeatures rotation for tel forward-tip and cradle tilt — verify bodies actually rotate; if not, check Matrix3D/moveFeatures signature.
+- Strategy honest-flagged to user: strong first pass, NOT guaranteed flawless one-shot (written without live Fusion execution). User rationing live round-trips deliberately.
+
+### Next session pickup
+- User runs v2 in Fusion, reports message-box text / any error.
+- Then: fix fragile spots if needed + fold in 6 dovetail caliper numbers.
+- Geometry is DONE — do not re-litigate the concept (took 6 sketch revisions to settle; see above).
