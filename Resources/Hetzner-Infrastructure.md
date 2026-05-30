@@ -52,5 +52,17 @@ Sync: `git pull` from GitHub
 
 ## MCP Access
 
-Claude has vault-only MCP access (read/write notes, no shell).
-To add shell access: install a shell MCP server on Hetzner and register it in claude.ai connectors.
+Claude has two MCP connectors registered in claude.ai:
+
+**1. Vault MCP** — `mcp.magleblik.dk`
+- Read/write notes in Obsidian vault
+- Service: `/etc/systemd/system/obsidian-mcp.service`
+- Port: 3100
+- Package: `@bitbonsai/mcpvault`
+
+**2. Shell MCP** — `shell.magleblik.dk`
+- Execute shell commands on Hetzner
+- Service: `/etc/systemd/system/shell-mcp.service`
+- Port: 3101
+- Package: `mcp-server-commands` (installed globally at `/usr/bin/mcp-server-commands`)
+- ExecStart: `/usr/bin/npx supergateway --stdio "/usr/bin/mcp-server-commands" --port 3101 --cors --outputTransport streamableHttp`
