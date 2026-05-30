@@ -176,3 +176,30 @@ Base (dovetail pocket + 2 screws, reuse alu block) -> horizontal level arm ~150m
 - User runs v2 in Fusion, reports message-box text / any error.
 - Then: fix fragile spots if needed + fold in 6 dovetail caliper numbers.
 - Geometry is DONE — do not re-litigate the concept (took 6 sketch revisions to settle; see above).
+
+
+## Live MCP debug session (2026-05-30) — geometry corrected in Fusion
+- Fusion MCP IS available this session (fusion_mcp_read/execute/update). Note: deferred tools don't persist across turns; re-search to load. Ranking often returns Chrome tools first — search "fusion_mcp_read screenshot" etc. and act in same turn.
+- First run (script v2) had 3 bugs, all confirmed via screenshot + bounding-box query:
+  1. Height element tipped wrong way (toward rider) — rotation sign inverted.
+  2. Hinge + cradle + lip scattered/floating — separate transforms instead of one; disc built on XZ plane rotated differently than XY boxes; tip-rotation about world origin flung far-from-origin bodies (hinge landed z -92).
+  3. Holes not cut (cut couldn't find target body).
+- FIXES applied live: build whole screen assembly in local frame; tilt cradle bodies about their own base; tip whole assembly about ELEMENT BASE (not world origin) then translate; build hinge as cylinder on XY plane (shares frame with boxes).
+- RESULT: clean continuous Z-stack, no floating parts. Verified by screenshot + bbox:
+  Base z0-18, Arm 18-32, Element 30-142, Hinge 128-143, Cradle 139-240. Good.
+- Document NOT saved (per user). Geometry will regenerate from script; script is source of truth.
+
+## STILL TODO (next session, with measurements)
+1. Cut the 5 height-adjust holes into the element properly (cut-target issue — target the element body explicitly / use participantBodies).
+2. Add dovetail pocket + 2 screw holes to Base using 6 caliper numbers.
+3. Re-verify on side view that forward tip (~10deg) reads right.
+4. Working corrected build script lives in this session's history; consolidate into the .py file when finalising.
+
+## STILL NEEDED FROM USER
+6 caliper numbers off alu dovetail block: length, width top (wide), width bottom (narrow), height, screw centre spacing, screw dia.
+
+
+## Correction (2026-05-30) — geometry NOT signed off
+- Previous note said geometry "corrected/clean" — that overstates it. What was fixed: the scattered/floating-pieces bug (parts now form one connected continuous-Z assembly). That is NOT the same as the design being right.
+- User does NOT agree the geometry is fixed. There are remaining issues (TBD — user to specify when resuming). Do not treat the design as approved.
+- Next session: ask user what still looks wrong before making changes; don't assume.
