@@ -1,0 +1,160 @@
+---
+type: project
+status: design
+printer: Prusa Core One
+interface: Zwift Ride stem end-cap dovetail
+device: laptop
+created: '2026-05-30'
+---
+# Mount: Zwift Ride Laptop Arm
+
+Replace the paint-spattered easel currently propping a laptop in front of the Zwift Ride with a printed arm that fixes to the Zwift Ride cockpit and holds the laptop screen ~100mm up and ~150mm forward of the mount, tilted slightly back for rider viewing angle.
+
+## Hardware context
+- Trainer: Zwift Ride (white frame, integrated cockpit, Z-button shifter pods).
+- Printer: Prusa Core One (build vol ~250x220x270, enclosed CoreXY; ASA/ABS/PETG capable).
+- Device: laptop (heavier + longer than a tablet — leverage matters).
+
+## Mounting interface — KEY FINDING
+The Zwift Ride accessory interface is the **stem end cap**, not a handlebar clamp.
+- Remove existing cap with a 6mm Allen key: loosen bolt underneath, slide cap off. This exposes a **dovetail**.
+- Two community approaches:
+  1. Reuse the original metal dovetail block + 2 self-tapping screws (blur_457 original).
+  2. Print the dovetail integrally — no metal part, no extra hardware (blur_457 v2, model 1160468; csthomas84 remix 1580623).
+- Official Zwift tablet holder rated for **1kg tablet max**; community mounts warned **not load-bearing**. A laptop on a 150mm arm exceeds these assumptions — design must respect the leverage.
+
+## Strategy (token-efficient)
+- DO NOT re-model the dovetail from scratch — it is the costly fit-iteration part.
+- Use a proven end-cap base (blur_457 integral-dovetail, model 1160468) as the **base component** — borrow the solved interface.
+- Design ONLY the new arm: vertical riser (~100mm), forward cantilever (~150mm), cradle tilted back ~10-15deg with lower lip + upper strap slot.
+- Author/iterate the Fusion script as TEXT here; run natively in Fusion (Scripts & Add-Ins) on the laptop in one pass. Bring back errors/photos to fix text. MCP is on a separate laptop and not needed for one-shot builds.
+
+## Target geometry (parametric — confirm before scripting)
+- screen_height_above_mount = 100 mm
+- screen_forward_offset = 150 mm
+- screen_tilt_back = ~10-15 deg (TBD)
+- Cantilever needs triangulated gusset for stiffness; max walls; ASA or PETG.
+
+## Reference designs
+- blur_457 v2 (integral dovetail, no hardware): printables.com/model/1160468
+- csthomas84 remix (printable dovetail): printables.com/model/1580623
+
+## Open questions before scripting
+1. Laptop exact dimensions: width, depth/thickness, weight, screen size.
+2. Landscape (likely) — confirm orientation.
+3. Reuse original metal dovetail block, or fully printed dovetail?
+4. Filament choice: ASA vs PETG.
+5. Cradle style: open lip + strap, or fuller tray?
+
+## Changelog
+- 2026-05-30: Project created. Interface identified as stem end-cap dovetail. Strategy set: remix proven base, design arm only.
+
+
+## Final design decisions (2026-05-30)
+- Device baseline: Lenovo Yoga 7i 14" — 316.7 x 220.3 x 17.4 mm, ~1.45 kg, 360deg convertible.
+- Cradle adjustment RANGE (not Yoga-specific): device width ~250-360mm, thickness ~7mm (tablet) to ~22mm (large laptop).
+- REUSE existing aluminium dovetail block (bolted to console alu frame). Console proven to hold 15kg+ on front — leverage NOT a constraint.
+- Height adjustment: discrete holes + pin/thumbscrew (rigid). Steps ~15-20mm.
+- Retention: lower lip + sliding top retainer in a channel (NO strap).
+- Tilt: ADJUSTABLE via toothed/notched hinge locking at discrete angles with thumbscrew (not friction pivot — avoids creep under laptop weight).
+- Filament: TBD ASA vs PETG (both fine in Core One enclosure).
+
+## Script approach
+- Single Fusion 360 Python script, all dims as parameters at top.
+- Dovetail pocket params marked as PLACEHOLDERS — user fills 6 caliper numbers:
+  block width, block length, block height, dovetail top width, dovetail bottom width (=> angle), screw hole centre spacing, screw hole dia.
+- Everything else (arm, post, tilt hinge, cradle) is solved geometry independent of measurements.
+- Run natively in Fusion Scripts & Add-Ins, one pass.
+
+## Changelog
+- 2026-05-30: Project created. Interface identified as stem end-cap dovetail.
+- 2026-05-30: Decisions locked — discrete-hole height, lip+sliding retainer, adjustable toothed tilt hinge, reuse alu dovetail. Yoga 7i 14" baseline confirmed. Writing script.
+
+
+## Correction (2026-05-30) — cradle orientation
+- Sketch v1 drew device on FORWARD face → screen faced away from rider. WRONG.
+- Correct: device + lower lip on REAR (saddle-facing) face; back plate top leans FORWARD ~12deg so rider looks slightly down onto screen.
+- SCRIPT BUG to fix next pass: cradle lip currently built on `cy + cradle_lip_depth` (forward) side — must move to REAR face. Retainer rails/slider likewise. Flip when adding hinge teeth + slider piece.
+
+
+## Geometry revision (2026-05-30) — arm order flipped
+- NEW arm shape: horizontal 150mm forward run FIRST off the dovetail, THEN riser ~100mm angled UP & BACK toward rider (brings screen to eye-line, better looking). Aligns with dovetail slide axis.
+- Riser carries tilt hinge + cradle at its top.
+- Stiffening: user chose SLIM arm, accept a little flex. Expect some screen bob during hard out-of-saddle efforts; stiffen later via one parameter (arm_thick) if needed. Safe structurally (console handles 15kg+).
+- Sketch updated to this geometry + rider-facing cradle. Script NOT yet rewritten.
+- PENDING SCRIPT REWRITE (do all at once with caliper numbers): (1) arm = forward-then-back-angled-riser; (2) reposition hinge+cradle to riser top; (3) flip cradle lip/retainer to REAR face; (4) add hinge teeth; (5) add sliding retainer piece.
+
+## Still needed from user
+- 6 caliper numbers off alu dovetail block (block length, width top, width bottom, height, screw spacing, screw dia).
+
+
+## Geometry revision 2 (2026-05-30) — height adjust moved under screen, riser leans away
+- Height adjustment MOVED from low (by dovetail) to UP UNDER THE SCREEN.
+- Adjustment = TELESCOPING along the riser axis (discrete holes), not vertical.
+- Riser now leans FORWARD / AWAY from rider (reversed from revision 1).
+- Tilt hinge brings the screen FACE back to the rider (decoupled from riser lean).
+- Stack: base -> short fixed neck -> 150mm horizontal run -> forward-leaning riser -> telescoping height section (under screen) -> tilt hinge -> rider-facing cradle.
+- CAVEAT (noted to user): telescoping along a leaning riser means raising screen also pushes it forward (~few cm over 100mm travel); re-tilt to keep face square. Alternative if disliked: vertical telescoping column (busier look).
+- Sketch updated. Script still NOT rewritten.
+
+## Pending script rewrite — do ALL at once with caliper numbers
+1. Base + short fixed neck (no adjustment at base).
+2. 150mm horizontal run off neck.
+3. Forward-leaning riser.
+4. Telescoping height section under screen (discrete holes along riser axis).
+5. Tilt hinge (add teeth) decoupling face angle.
+6. Cradle lip/retainer on REAR rider-facing face.
+7. Sliding retainer piece.
+8. Fold in 6 dovetail caliper numbers.
+
+
+## Geometry revision 3 (2026-05-30) — SIMPLIFIED to single arm
+- Removed the fixed neck entirely (was purposeless — user correctly questioned it).
+- Removed the separate riser. Arm is now ONE gentle upward+forward sweep straight off the dovetail base.
+- 100mm datum CORRECTED: measured to the CRADLE LIP (screen lower edge), screen extends UP from there. Eye-line now roughly level, not looking up.
+- Telescoping height adjust + tilt hinge remain at the screen end.
+- ~150mm forward reach, ~100mm to lip — both fine-tuned on the bike.
+- Caveat: telescoping along the diagonal arm axis => raising screen drifts it up+forward; tilt squares the face. Acceptable per user.
+- This is the settled geometry. Sketch updated.
+
+## SETTLED DESIGN SUMMARY (for script)
+Stack: Base (dovetail pocket + 2 screws, reuse alu block) -> single arm (gentle up+forward sweep, slim, accepts flex) -> telescoping height section at screen end (discrete holes along arm axis) -> toothed tilt hinge (15deg steps) -> cradle (lower lip = 100mm datum, device extends up, lip+retainer on REAR rider-facing face, sliding top retainer between 2 rails). Cradle width ~330mm (fits 250-360 wide, 7-22 thick). Print ASA or PETG.
+
+## ONLY remaining input before full script
+6 caliper numbers off alu dovetail block: block length, width top (wide), width bottom (narrow), height, screw centre spacing, screw dia.
+
+
+## Geometry revision 4 (2026-05-30) — arm must be HORIZONTAL (corrected)
+- Arm is TRULY HORIZONTAL/level off the dovetail at console height, ~150mm forward. NOT a sweep, NOT angled up.
+- At the far end: telescoping height element rises and LEANS FORWARD/AWAY from rider (discrete holes).
+- Tilt hinge squares screen face back to rider.
+- Cradle lip = 100mm datum; screen extends up; faces rider.
+- This supersedes the "single gentle sweep" of revision 3. Revisions went: rise-first L -> forward-first L -> back-angled riser -> away-angled riser w/ height under screen -> single sweep -> THIS (horizontal arm + forward-leaning telescoping element). Settled here.
+
+## SETTLED GEOMETRY (final, for script)
+Base (dovetail pocket + 2 screws, reuse alu block) -> HORIZONTAL level arm ~150mm -> forward-leaning telescoping height element at far end (discrete holes) -> toothed tilt hinge (15deg steps, squares face to rider) -> cradle (lower lip = 100mm datum, device extends up, lip+sliding retainer on REAR rider-facing face, 2 rails). Cradle width ~330mm (fits 250-360 wide, 7-22 thick). ASA/PETG.
+
+## ONLY remaining input: 6 caliper numbers off alu dovetail block
+block length, width top (wide), width bottom (narrow), height, screw centre spacing, screw dia.
+
+
+## Geometry revision 5 (2026-05-30) — steepened height element
+- Forward-leaning element was too long (~300mm) because a shallow lean covers vertical distance inefficiently.
+- FIX (option 1): near-vertical element with only a SLIGHT forward tip. ~110mm to reach the 100mm lip datum. Tilt hinge still squares face to rider.
+- Settled. Final geometry = horizontal level arm ~150mm + near-vertical (slight forward tip) telescoping height element + toothed tilt hinge + rider-facing cradle (lip = 100mm datum).
+
+## Suggested concrete params for script (from this geometry)
+- arm horizontal length ~150mm, arm_thick ~12mm, arm_width ~24mm
+- height element near-vertical, ~10deg forward tip, length ~120mm travel, discrete holes ~18mm pitch
+- tilt hinge 15deg steps
+- cradle width ~330mm, lip = 100mm datum, fits 250-360 wide / 7-22 thick
+
+
+## Geometry revision 6 (2026-05-30) — cradle tilt direction corrected
+- Rider sits HIGHER than the screen and looks slightly DOWN at it.
+- Therefore screen TOP tips AWAY (forward), face angles UP toward rider. (Previous draw had it backwards — top toward rider.)
+- Tilt hinge default should reflect this: screen face up toward a higher eye point.
+- Cradle/sketch updated. Eye-line now angled down to screen.
+
+## FINAL SETTLED GEOMETRY
+Base (dovetail pocket + 2 screws, reuse alu block) -> horizontal level arm ~150mm -> near-vertical telescoping height element w/ slight forward tip (~110-120mm, discrete holes) -> toothed tilt hinge (15deg steps) -> cradle: lower lip = 100mm datum, screen extends up, screen TOP tips away / face angles UP toward higher rider, lip+sliding retainer on rider-facing side, 2 rails. Width ~330mm (250-360 wide, 7-22 thick). ASA/PETG.

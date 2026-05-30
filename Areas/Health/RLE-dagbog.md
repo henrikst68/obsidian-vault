@@ -12,3 +12,8 @@ Flimren når jeg bevæger øjnene. Afstandssyn perfekt. Nærsyn godt. Trætte ø
 ## Dag 11 – 2026-04-29
 
 Ingen mærkbar forbedring på skærmafstand (mellemsynet). Stadig tørre øjne.
+
+
+## Dag 23 – 2026-05-12
+
+Stadig ingen større forbedring på skærmafstand (mellemsynet). Ny gene: hovedpine over øjnene.
