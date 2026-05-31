@@ -28,3 +28,12 @@ WireGuard VPN is running on the Raspberry Pi but is **not currently documented**
 
 ## Open task: create new VPN clients from external networks
 Need a way to add peers **without being on the home LAN / SSH'd into the Pi locally**. Options to evaluate — see companion note.
+
+
+---
+
+## Update 2026-05-31 — linked to project note
+
+Connectivity planning is now resolved in [[Home-Network-Agent-Project]]: the Hetzner VPS will be added as a **new WireGuard peer** to this existing Pi-hosted VPN (chosen over Tailscale and over exposing the HA API). The "create new VPN clients from external networks" task above is the mechanism needed to add that Hetzner peer without being on the LAN — same problem, tracked in both places.
+
+**Still open here (Pi-side capture — Claude cannot reach the Pi yet):** the entire config checklist above. To be filled once the Pi MCP tool is connected.
