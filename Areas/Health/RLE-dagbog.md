@@ -33,3 +33,8 @@ Fjern- og nærsyn: Skarpt og uden problemer.
 **Plan:** Ugentlig selvtest ved fast skærmafstand og fast belysning. Notér om +1 stadig er nødvendigt. Kontakt klinikken hvis ingen fremgang inden uge 12 (ca. 2026-07-12). Næste planlagte opfølgning: oktober 2026.
 
 **Tillæg dag 53:** På trods af skarpt nærsyn ses stadig 2 niveauer af skygger/halos omkring objekter og tekst i nærzonen. Sandsynligvis diffraktionsringe fra den multifokale linse – typisk bieffekt som hjernen gradvist lærer at undertrykke. Noteret som reference for fremtidig sammenligning.
+
+## Spørgsmål til oktober-opfølgning
+
+- Hvis mellemsynet stadig ikke er tilpasset om et år: er laser-korrektion (bioptics/enhancement) en mulighed uden at forstyrre det allerede velfungerende fjern- og nærsyn?
+- Er den manglende mellemsynstilpasning et refraktionsproblem (kan korrigeres med laser) eller et neuroadaptationsproblem (kan ikke)?
