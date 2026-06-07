@@ -203,3 +203,25 @@ Base (dovetail pocket + 2 screws, reuse alu block) -> horizontal level arm ~150m
 - Previous note said geometry "corrected/clean" — that overstates it. What was fixed: the scattered/floating-pieces bug (parts now form one connected continuous-Z assembly). That is NOT the same as the design being right.
 - User does NOT agree the geometry is fixed. There are remaining issues (TBD — user to specify when resuming). Do not treat the design as approved.
 - Next session: ask user what still looks wrong before making changes; don't assume.
+
+
+## Block measurements + interface correction (2026-06-07)
+- Alu block MEASURED (caliper, 3 photos + hand checks). These are AUTHORITATIVE; mesh is visual-reference only.
+  - Width (narrow, L-R as mounted): **29.5 mm**
+  - Height (Z): **43.87 mm** (confirmed twice — Image 1 = 43.87, Image 3 = 43.94, same dim within tolerance)
+  - Depth (front-back): **40.55 mm** (not load-critical; size Base body to clear it)
+  - Screw hole dia: **4.4 mm** (M4 clearance)
+  - Hole spacing horizontal: **18 mm**
+  - Hole spacing vertical: **25 mm**
+  - Hole pattern: 4 holes, rectangle 18 (H) x 25 (V) — PENDING user confirm both pairs share 18mm H spacing.
+- INTERFACE CORRECTION: block is a RECTANGULAR 4-HOLE bracket, NOT a 2-screw dovetail with a tapered pocket.
+  - Supersedes all prior "dovetail pocket + 2 screws" + "width top/width bottom => angle" language in Base spec & script.
+  - Base must capture a 29.5 (W) x 43.87 (H) x 40.55 (D) rectangular block and bolt via a 4-hole 18x25 M4 pattern. No dovetail taper.
+  - Script Base component needs reworking accordingly (was built around dovetail placeholders).
+- Revopoint scan of block now loaded in Fusion as RAW MESH — used ONLY as visual fit check, NOT referenced for geometry (avoids fragile mesh-face refs; keeps Base fully parametric off measured values).
+
+## Open items still standing
+- Confirm 4-hole pattern is a clean 18x25 rectangle (both H pairs = 18mm).
+- Confirm front face the holes sit on is FLAT (not angled) — earlier photos looked angled; resolve before Base face is modelled.
+- Prior unresolved geometry issues (user never specified) still open — ask before changing.
+- Height-adjust holes still not cut into HeightElement (participantBodies/cut-target issue).
