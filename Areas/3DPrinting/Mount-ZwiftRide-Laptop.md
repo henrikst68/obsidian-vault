@@ -253,3 +253,61 @@ Base (dovetail pocket + 2 screws, reuse alu block) -> horizontal level arm ~150m
 
 ### DECISION for next session
 - Keep using our own parametric design (Base + horizontal arm + near-vertical height element + toothed up-tilt hinge + rider-facing cradle). Use STL only to sanity-check the base-plate footprint and takeoff point. Do not graft mesh.
+
+
+## Interface CORRECTED from STL extraction (2026-06-07)
+- Earlier "two parallel faces, 8mm depth step" interpretation was WRONG. Resolved by extracting the 4 hole centres directly from TabHolderTubeBase.stl.
+- The 4 mounting holes lie on a SINGLE FLAT FACE raked back ~30 deg from the depth (Y) axis.
+- Refined hole centres (mesh coords, mm):
+  - A-left  (118.55, 101.22, 42.38)
+  - A-right (136.71, 101.21, 42.39)
+  - B-left  (118.67, 123.13, 54.78)
+  - B-right (136.69, 123.44, 55.49)
+- Pattern in the face plane: 18mm horizontal (X) x 25mm up the raked face (pair-to-pair = 25.48mm slant). Matches caliper 18 x 25.
+- The "8mm above" = the Z (height) component of the 30deg rake; "different plane" = the upper pair further along the raked face. NOT a parallel depth step.
+- Hole dia ~4-5mm in mesh (facet-inflated) -> use caliper 4.4mm (M4 clearance).
+- CONCLUSION: STL carries the FULL alu-block interface. Build the parametric Base by referencing these 4 hole centres + the single 30deg-raked mating face, NOT the flat caliper axes. This captures the rake the calipers flattened.
+- Lower four bores near Y193/Z~0 and the Y240 hole = base-plate/holder features, NOT the block interface — ignore for Base.
+
+### Base build (next MCP session)
+- Import/keep the mesh as reference; snap 4 construction points to the hole centres above; one construction plane on the 30deg raked face.
+- Build Base body to that plane, 4x M4 (4.4) clearance holes on the 18x25 pattern, counterbored for heads as needed.
+- Then hand off to horizontal arm per settled geometry.
+- Supersedes the "stepped 2-boss / 8mm depth" Base sketch from earlier today.
+
+
+## NEXT MCP SESSION — ordered execution steps (2026-06-07)
+Pure execution against fixed spec below. Geometry/interface are SETTLED — do not re-litigate. Conserve round-trips: batch reads, verify by screenshot + bbox after each major body.
+
+### 0. Setup
+- Load Fusion MCP tools (deferred; re-search each turn: "fusion_mcp_read", "fusion_mcp_execute", "fusion_mcp_update"). Ranking may surface Chrome tools first — search specifically.
+- Import TabHolderTubeBase.stl as mesh body for visual reference (do NOT edit it). Confirm orientation matches extracted coords (holes near X118-137, Y101-123, Z42-55).
+
+### 1. Interface reference geometry (from STL extraction)
+- Create 4 construction points at hole centres (mm):
+  A-left (118.55,101.22,42.38) A-right (136.71,101.21,42.39)
+  B-left (118.67,123.13,54.78) B-right (136.69,123.44,55.49)
+- Create construction plane through the 4 points = the 30deg-raked mating face. (3-point plane; verify the 4th point lies ~on it, tol <0.5mm.)
+- Sanity: in-plane pattern should read 18mm (X) x 25mm (up-slope).
+
+### 2. Base body
+- Build Base as a plate on/parallel to the raked plane, thickness ~6mm, sized to cover the 18x25 pattern + ~6mm margin.
+- Cut 4x M4 clearance holes dia 4.4mm at the 4 points, axis normal to the raked face.
+- Counterbore heads if needed (cbore ~8mm dia x ~4mm) — confirm screw head style first.
+- Use participantBodies = [Base] on the cut to avoid the prior cut-target failure.
+- VERIFY: screenshot + bbox; holes present; Base hugs mesh face.
+
+### 3. Arm handoff
+- From Base, build HORIZONTAL level arm ~150mm forward (per settled geometry). Confirm takeoff point/orientation against base-plate footprint (~105x104, top Z~8.8).
+
+### 4. Remaining (carry from prior session)
+- HeightElement: near-vertical, ~10deg forward tip; CUT the discrete height-adjust holes (prior failure: target the element body explicitly / participantBodies).
+- TiltHinge: toothed, 15deg steps, tilts screen face UP toward higher rider.
+- Cradle + TopRetainer: lip+sliding retainer on rider-facing side.
+
+### 5. Geometry inspection (UNRESOLVED — do FIRST before changes)
+- User flagged unspecified geometry issues at end of prior session; never specified. Ask user what looks wrong on a fresh side-view screenshot BEFORE editing. Do not assume.
+
+### Reminders
+- Don't save the document unless user asks; script is source of truth.
+- Fragile API spots from v2: circularPatternFeatures (hinge teeth), SymmetricExtentDirection enum, moveFeatures/Matrix3D rotations — validate live, fix per Fusion version.
