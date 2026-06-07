@@ -225,3 +225,18 @@ Base (dovetail pocket + 2 screws, reuse alu block) -> horizontal level arm ~150m
 - Confirm front face the holes sit on is FLAT (not angled) — earlier photos looked angled; resolve before Base face is modelled.
 - Prior unresolved geometry issues (user never specified) still open — ask before changing.
 - Height-adjust holes still not cut into HeightElement (participantBodies/cut-target issue).
+
+
+## Base interface RESOLVED (2026-06-07)
+- Block side-profile confirmed via Image 3 + sketch review. Interface is a STEP, not an angle.
+- Two MATING FACES on the rider/screen side, parallel, offset 8mm in DEPTH:
+  - Lower face (near pair) — closer to rider.
+  - Upper face (far pair) — stands 8mm proud in depth.
+  - Both faces parallel; all 4 holes point the same direction. No canted face → arm will not sit cocked.
+- Dovetails are on the LOWER part of the block body, frame side — embedded in the Zwift Ride frame. Base does NOT engage them.
+- Base design: two flat bosses 8mm apart in depth, seating against the two faces; 4x M4 clearance (4.4mm) through-holes on the 18(H)x25(V) rectangle, split across the two faces (near pair on lower, far pair on upper).
+- Block envelope 29.5(W) x 43.87(H) x 40.55(D) used only to size the Base body to clear/cradle the block.
+- Revopoint mesh in Fusion = visual fit check only; geometry driven entirely off these measured values.
+
+### Base spec is now COMPLETE — no further block input needed.
+### Next session: rework Base component to stepped 4-hole interface (replaces old dovetail-pocket/2-screw Base), then re-address open items (height-adjust hole cut; user's unspecified geometry concerns).
