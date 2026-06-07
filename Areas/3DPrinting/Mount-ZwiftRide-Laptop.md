@@ -240,3 +240,16 @@ Base (dovetail pocket + 2 screws, reuse alu block) -> horizontal level arm ~150m
 
 ### Base spec is now COMPLETE — no further block input needed.
 ### Next session: rework Base component to stepped 4-hole interface (replaces old dovetail-pocket/2-screw Base), then re-address open items (height-adjust hole cut; user's unspecified geometry concerns).
+
+
+## Donor STL reviewed — TabHolderTubeBase.stl (2026-06-07)
+- User supplied an existing tablet-holder STL built around the SAME alu block, asking to reuse its interface and replace the tablet-holder part with our design. Clean approach chosen: mesh = spatial reference only, NOT edited. Our parametric Base (caliper-measured stepped 4-hole interface) is authoritative for the actual mount.
+- Mesh facts (binary STL, 51k tris) for spatial matching:
+  - Base plate footprint ~105mm (X) x ~104mm (Y); top surface Z~8.8mm, mounting underside Z~-9mm (~18mm base stack).
+  - Cradle/backrest springs off the REAR edge of the base plate (~Y180) rising forward+up.
+  - Donor backrest leans back ~41 deg from vertical = tablet propped near-upright, tilted back. This is a DIFFERENT intent from ours (near-vertical height element + adjustable toothed hinge tilting screen face UP toward higher-seated rider). DO NOT copy the 41 deg cradle.
+  - Donor pocket geometry NOT copied (its interface region measures differently in-mesh; our caliper interface supersedes).
+- NET: little new info needed from the STL — interface already = caliper numbers; arm/height/tilt/cradle = our settled 6-revision design. STL usefully CONFIRMS base-plate envelope (~105x104, ~18mm stack) and rear-edge cradle takeoff = sane footprint for our ~150mm forward arm + ~100mm rise.
+
+### DECISION for next session
+- Keep using our own parametric design (Base + horizontal arm + near-vertical height element + toothed up-tilt hinge + rider-facing cradle). Use STL only to sanity-check the base-plate footprint and takeoff point. Do not graft mesh.
