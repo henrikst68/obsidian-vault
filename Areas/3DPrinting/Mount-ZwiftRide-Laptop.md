@@ -311,3 +311,26 @@ Pure execution against fixed spec below. Geometry/interface are SETTLED — do n
 ### Reminders
 - Don't save the document unless user asks; script is source of truth.
 - Fragile API spots from v2: circularPatternFeatures (hinge teeth), SymmetricExtentDirection enum, moveFeatures/Matrix3D rotations — validate live, fix per Fusion version.
+
+
+## BASE BUILT IN FUSION (2026-06-09) — supersedes the 30deg-rake entry
+- CORRECTION of my own earlier error: the "single flat face raked 30deg" entry (2026-06-07) was WRONG. The 4 holes are NOT coplanar. Confirmed by user (Image 3 side profile) and by the 3-point plane fit leaving the 4th hole 0.45mm off — the tell I'd ignored. Interface = TWO PARALLEL FACES, 8mm step in depth (Y). near pair on front face, far pair 8mm back. Both faces' holes point same way. This matches the long-settled spec; the 30deg detour was a mistake.
+
+### What got built this session (Base only)
+- Mesh re-imported CLEANLY: TabHolderTubeBase.stl from C:\\Users\\micro\\OneDrive\\3DPrint\\Zwift Ride PC mount, via meshBodies.add(path, MeshUnits.MillimeterMeshUnit, baseFeature). Lands at correct 1:1 mm, bbox X74.9-180.4 Y88.9-284.6 Z-9-79.7 (size 105.5x195.7x88.7). The EARLIER mesh was scaled ~4.5x and metres off origin — deleted.
+- Base = stepped 2-level block, one joined BRep body, built in the MESH's own coordinate frame (so it visually mates). 4x M4 (4.4mm) holes cut at true donor hole centres. Verified: 16 faces, 4 cylindrical bores, sits at the interface end of the mesh on screen.
+- Base bbox mm: X109.5-145.7, Y89.2-135.3, Z33.4-64.5.
+
+### HARD-WON BUILD CONVENTIONS (use these to avoid repeating today's thrashing)
+- DOC IS SINGLE-COMPONENT (Part Design): cannot addNewComponent. Build all parts as BREP BODIES in root, not sub-components.
+- Mesh import REQUIRES explicit MeshUnits arg: meshBodies.add(path, adsk.fusion.MeshUnits.MillimeterMeshUnit, baseFeature). Wrap in baseFeature.startEdit()/finishEdit() for parametric docs.
+- New sketch auto-creates an ORIGIN sketchPoint at (0,0,0). When iterating sketchPoints as hole locations, FILTER OUT the origin or it becomes a phantom 5th hole.
+- On an XZ-offset construction plane: sketchX -> +worldX, plane offset -> worldY, but sketchY -> NEGATIVE worldZ. Negate Z inputs. (Verified by probe point.)
+- sketch.project() needs a sketch ENTITY, not a raw Point3D (throws InternalValidationError).
+- ConstructionPlane has no isVisible setter; hide via root.isConstructionFolderLightBulbOn=False / isSketchFolderLightBulbOn=False.
+- Screenshots can render sketch entities over the solid and can frame empty space — call activeViewport.fit() first; hide sketches before judging hole count; verify hole count via cylindrical-face count, not by eye.
+- Build coords in the MESH frame (real STL hole centres ~X118-137,Y101-123,Z42-55), NOT a recentred origin — else Base floats away from the reference mesh.
+
+### NEXT: arm + up the stack (unchanged settled geometry)
+- From Base front face, HORIZONTAL level arm ~150mm forward, then near-vertical height element (~10deg forward tip, discrete adjust holes), toothed tilt hinge (15deg steps, face UP toward higher rider), rider-facing cradle (lip=100mm datum, sliding top retainer).
+- Doc NOT saved (per standing pref). Geometry not yet signed off by user — still owe a fresh side-view inspection of the full stack once arm+ is built; ask what looks wrong before changing.
