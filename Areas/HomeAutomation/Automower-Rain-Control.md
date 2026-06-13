@@ -50,6 +50,17 @@ Netatmo rain sensor drops to `unavailable` intermittently (the 429 webhook rate-
 3. Netatmo live gauge > 0.1 mm → ground-truth confirmation (slow, kept as backstop).
 Guard nowcast term on `radar_online == true`.
 
+### ✅ DONE (2026-06-13) — nowcast wired in
+- Henrik created the instance via UI → entity `weather.met_no_nowcast_sandgraven` (lat 56.0637, lon 12.14). Live, radar_online=true, radar_coverage=ok.
+- `binary_sensor.automower_rain_imminent` state template now ORs three signals, nowcast first:
+  1. **nowcast_wet** = `radar_online==true` AND (`has_precipitation==true` OR state in rainy/pouring/lightning-rainy/snowy-rainy)
+  2. **forecast_wet** = `sensor.automower_forecast_2h` attr `wet`
+  3. **raining_now** = Netatmo live > 0.1 mm
+- Verified live: with nowcast=`rainy`, forecast `wet=False`, Netatmo=0.096 mm (below threshold), the sensor correctly read `on` — i.e. the nowcast alone was driving early detection, exactly the goal.
+- Package backup: `packages/automower_rain.yaml.bak.*`.
+- Automation entity-ids (from aliases): `automation.automower_dock_when_rain_imminent`, `automation.automower_resume_after_rain` (both `on`).
+- Note: `forecast` array is empty in the state attributes; the 5-min-resolution forecast (23 pts) is available via the `weather.get_forecasts` service / `forecast_json` attr if finer triggering is wanted later. Current logic uses `has_precipitation`+state, which is always present.
+
 ## TODO / open items
 - [ ] Fix or revive the cold-temperature automations (broken switch reference) and make sure cold-dock and rain-resume don't fight (resume re-checks dry but not temp).
 - [ ] Consider adding a temp condition to the resume action.
