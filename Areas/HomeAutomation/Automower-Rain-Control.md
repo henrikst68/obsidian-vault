@@ -31,6 +31,25 @@ The old `Automower too cold` / `not too cold` automations target switch unique_i
 ## Netatmo dependency / known weakness
 Netatmo rain sensor drops to `unavailable` intermittently (the 429 webhook rate-limit issue). The binary sensor is built so a missing live reading is treated as 0 mm and availability follows the forecast sensor instead — so forecast-driven docking still works when Netatmo is down. Live "rain has started" detection is lost during those dropouts.
 
+## Netatmo latency is unfixable — nowcast added instead (2026-06-13)
+**Root cause of Netatmo rain delay:** The Netatmo Smart Home Weather Station reports to Netatmo's cloud only every ~10 min (observed 12-min cadence in HA history). Webhooks explicitly do NOT push weather-station data (per official HA Netatmo docs — weather station, air-quality monitor, and public stations are excluded from webhook events). So neither faster polling nor re-enabling webhooks can reduce the live rain delay. It is a hardware/cloud limitation. HA polls WEATHER every ~5 min (`WEATHER: 600 / CLOUD_FACTOR 2` in `netatmo/data_handler.py`) which is already faster than Netatmo's publish, so HA is not the bottleneck.
+
+**Fix: Met.no Nowcast (predictive early warning).** Installed HACS custom integration `toringer/home-assistant-metnowcast` v2.3.6 → `custom_components/metnowcast/`. No pip deps (calls Met.no nowcast HTTP API). Loads cleanly (standard "untested custom integration" warning only). Polls every 7 min but each poll returns the next **90 min** of minute-resolution precipitation — so it predicts rain ahead regardless of poll cadence. Nordic-area only (we qualify).
+
+**Entity contract** (friendly name e.g. `Sandgraven` → `weather.met_no_nowcast_sandgraven`):
+- state = condition (`rainy`/`pouring`/`lightning-rainy`/…)
+- attr `has_precipitation` (bool) — cleanest trigger
+- attr `forecast` / `forecast_json` — 90-min minute array
+- attr `radar_online`, `radar_coverage` — guard on radar availability
+
+**ACTION REQUIRED (Henrik, UI step):** Settings → Devices & Services → Add Integration → "Met.no Nowcast" → Name `Sandgraven`, lat `56.0637`, lon `12.1400`. (Name `debug` gives random test rain.) Config-flow can't be safely scripted into .storage, so this is manual.
+
+**Planned wiring (one-step once entity exists):** add nowcast as the fastest of three OR'd signals in `binary_sensor.automower_rain_imminent`:
+1. Met.no nowcast `has_precipitation` / precip in next ~15–30 min → predictive, fastest.
+2. Met.no hourly forecast `wet` (existing `sensor.automower_forecast_2h`).
+3. Netatmo live gauge > 0.1 mm → ground-truth confirmation (slow, kept as backstop).
+Guard nowcast term on `radar_online == true`.
+
 ## TODO / open items
 - [ ] Fix or revive the cold-temperature automations (broken switch reference) and make sure cold-dock and rain-resume don't fight (resume re-checks dry but not temp).
 - [ ] Consider adding a temp condition to the resume action.
