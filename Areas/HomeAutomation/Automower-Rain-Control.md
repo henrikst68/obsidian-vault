@@ -61,6 +61,12 @@ Guard nowcast term on `radar_online == true`.
 - Automation entity-ids (from aliases): `automation.automower_dock_when_rain_imminent`, `automation.automower_resume_after_rain` (both `on`).
 - Note: `forecast` array is empty in the state attributes; the 5-min-resolution forecast (23 pts) is available via the `weather.get_forecasts` service / `forecast_json` attr if finer triggering is wanted later. Current logic uses `has_precipitation`+state, which is always present.
 
+### Klima tab — nowcast visibility (2026-06-13)
+Added two cards to the Klima view (`path: vejr`), right after the existing Windy radar iframe:
+1. **apexcharts** "Nedbør næste 90 min (nowcast)" — area chart from `forecast_json` (23×5-min points). Uses already-registered `apexcharts-card` HACS resource.
+2. **entities** "Nowcast status" — condition, `has_precipitation`, `radar_online`, `radar_coverage` attributes of `weather.met_no_nowcast_sandgraven`.
+Lovelace backup: `.storage/lovelace.lovelace.bak.1781380032`.
+
 ## TODO / open items
 - [ ] Fix or revive the cold-temperature automations (broken switch reference) and make sure cold-dock and rain-resume don't fight (resume re-checks dry but not temp).
 - [ ] Consider adding a temp condition to the resume action.
