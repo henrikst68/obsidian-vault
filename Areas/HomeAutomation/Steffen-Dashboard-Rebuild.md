@@ -43,6 +43,26 @@ The integration's `device_tracker` only exposes `positions[0]` (latest point), n
 3. `picture-elements` over a garden orthophoto/Husqvarna-app screenshot, mower icon via lat/lon→x/y template (2-corner calibration). Nicest, app-like.
 4. Position history/trail — recorder + path card, or pull `positions` array.
 
+## Satellite map upgrade — option 2 (custom:map-card)
+Core OSM `map` card had poor visibility at garden scale, so replaced with **`custom:map-card`** (nathan-gs/ha-map-card v1.15.0) on satellite tiles.
+
+**Install (manual, not via HACS UI):**
+- HACS was present but the card wasn't installed. Downloaded release JS to `www/community/ha-map-card/map-card.js` (663 KB, v1.15.0).
+- Registered Lovelace resource `/local/community/ha-map-card/map-card.js` (module) in `.storage/lovelace_resources` (HA stopped → edit → start). Backup: `lovelace_resources.bak.*`.
+- Verified: resource serves HTTP 200.
+
+**Card config (replaces the core map card, still card #2):**
+- `type: custom:map-card`, `focus_entity: device_tracker.am430x_nera`, `zoom: 19`.
+- `tile_layer_url: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}` — Esri World Imagery, **no API key**, tile order `{z}/{y}/{x}`, native max zoom 19. Verified Pi reaches it (HTTP 200, real tile).
+- Entity trail: `history_start: 2 hours ago`.
+- Attribution set to Esri.
+
+**Note:** after registering a new Lovelace resource, browsers may need a hard refresh / cache clear once.
+
+**Existing garden asset discovered:** `www/husqvarna/Sandgraven1.png` (1152×809) + `Sandgraven1.kml` (from Jun 2024). The KML holds only two arbitrary marker points (12.1404013,56.0633052 and 12.1398447,56.0637906), NOT corner bounds — so the PNG can't be reliably georeferenced for a picture-elements overlay (option 3) without knowing pixel↔coord mapping. Kept option 2 (satellite) instead.
+
+**DK orthophoto alternative:** Datafordeler/Kortforsyningen (SDFE) aerial imagery would be higher-res for DK but now needs an API token; Esri World Imagery chosen for zero-auth simplicity. Swap `tile_layer_url` later if a token is set up.
+
 ## Verification
 All entity references in the rebuilt view resolve (0 missing). 7 cards (after map added).
 
