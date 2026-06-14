@@ -74,6 +74,15 @@ Lovelace backup: `.storage/lovelace.lovelace.bak.1781380032`.
 - **Central fix:** wrote a tiny custom card `www/local-cards/no-geo-iframe-card.js` (no deps) that renders the iframe with `allow="geolocation 'none'; gyroscope/magnetometer/accelerometer 'none'"` + `referrerpolicy=no-referrer`. Registered resource `/local/local-cards/no-geo-iframe-card.js` (module). Swapped the Klima Windy card `type: iframe` → `type: custom:no-geo-iframe-card` (kept url/title/aspect_ratio). Works for all devices. Needs a hard refresh after deploy.
 - Backups: `.storage/lovelace_resources.bak.*`, `.storage/lovelace.lovelace.bak.*`.
 
+### Windy REPLACED — geolocation dot unsuppressable (2026-06-14)
+The `allow="geolocation 'none'"` block did NOT remove the stray ping. Windy's "your location" dot is placed by **server-side IP localization**, not the browser geolocation API — confirmed twice by Windy staff (community topics 40899, 41701). It cannot be suppressed from our side, and CSS can't reach into a cross-origin iframe to hide it.
+**Resolution:** ditched the Windy iframe entirely, installed **`jpettitt/weather-radar-card` v3.6.5** (HACS default store; manual install used). Native HA Leaflet card → uses a real card marker at home coords, NO IP dot.
+- Files: `www/community/weather-radar-card/` (weather-radar-card.js + PNG/SVG assets). Resource `/local/community/weather-radar-card/weather-radar-card.js` (module).
+- Config: `data_source: DWD` (good DK coverage; can switch to `RainViewer` if DWD edge-clips far-north DK), center+marker 56.0637/12.140, zoom 9, 10-frame animated loop, play/zoom/recenter/range/scale controls, map_style Voyager.
+- Cleaned up: removed `no-geo-iframe-card.js` file + its resource (no longer needed).
+- Backups: `.storage/lovelace_resources.bak.*`, `.storage/lovelace.lovelace.bak.*`.
+- Note: card has a GUI editor for tweaking source/zoom/style live.
+
 ## TODO / open items
 - [ ] Fix or revive the cold-temperature automations (broken switch reference) and make sure cold-dock and rain-resume don't fight (resume re-checks dry but not temp).
 - [ ] Consider adding a temp condition to the resume action.
