@@ -64,7 +64,7 @@ Guard nowcast term on `radar_online == true`.
 ### Klima tab — nowcast visibility (2026-06-13)
 Added two cards to the Klima view (`path: vejr`), right after the existing Windy radar iframe:
 1. **apexcharts** "Nedbør næste 90 min (nowcast)" — area chart from `forecast_json` (23×5-min points). Uses already-registered `apexcharts-card` HACS resource.
-2. **entities** "Nowcast status" — condition, `has_precipitation`, `radar_online`, `radar_coverage` attributes of `weather.met_no_nowcast_sandgraven`.
+2. **entities** "Nowcast status" — condition, `has_precipitation`, `radar_online`, `radar_coverage` attributes of `weather.met_no_nowcast_sandgraven`. **(removed 2026-06-13 — chart kept, status card deleted per request.)**
 Lovelace backup: `.storage/lovelace.lovelace.bak.1781380032`.
 - Later: added a time axis to the apexcharts card — `xaxis.type: datetime`, local-time `HH:mm` labels (`datetimeUTC: false`), 6 ticks, axis ticks/border on, y-axis "mm" title, removed `layout: minimal` (it was hiding the axis), height 200px. Backup `.storage/lovelace.lovelace.bak.*`.
 
