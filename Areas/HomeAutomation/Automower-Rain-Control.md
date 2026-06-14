@@ -79,9 +79,9 @@ The `allow="geolocation 'none'"` block did NOT remove the stray ping. Windy's "y
 **Resolution:** ditched the Windy iframe entirely, installed **`jpettitt/weather-radar-card` v3.6.5** (HACS default store; manual install used). Native HA Leaflet card → uses a real card marker at home coords, NO IP dot.
 - Files: `www/community/weather-radar-card/` (weather-radar-card.js + PNG/SVG assets). Resource `/local/community/weather-radar-card/weather-radar-card.js` (module).
 - Config: `data_source: DWD` (good DK coverage; can switch to `RainViewer` if DWD edge-clips far-north DK), center+marker 56.0637/12.140, zoom 9, 10-frame animated loop, play/zoom/recenter/range/scale controls, map_style Voyager.
-- Cleaned up: removed `no-geo-iframe-card.js` file + its resource (no longer needed).
 - Backups: `.storage/lovelace_resources.bak.*`, `.storage/lovelace.lovelace.bak.*`.
 - Note: card has a GUI editor for tweaking source/zoom/style live.
+- **UPDATE (2026-06-14): switched `data_source` DWD → RainViewer.** DWD radar coverage ends right at Helsingør/Øresund — screenshot showed a grey "no data" wedge with the magenta coverage boundary arcing through Copenhagen/Malmö, and real rain echoes SW of home sat in the uncovered zone. DWD (German service) only just reaches southern DK; Nordsjælland is past its edge. RainViewer is global, no gap. Cleaned up: removed `no-geo-iframe-card.js` file + its resource.
 
 ## TODO / open items
 - [ ] Fix or revive the cold-temperature automations (broken switch reference) and make sure cold-dock and rain-resume don't fight (resume re-checks dry but not temp).
