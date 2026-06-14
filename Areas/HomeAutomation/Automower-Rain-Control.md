@@ -68,6 +68,12 @@ Added two cards to the Klima view (`path: vejr`), right after the existing Windy
 Lovelace backup: `.storage/lovelace.lovelace.bak.1781380032`.
 - Later: added a time axis to the apexcharts card — `xaxis.type: datetime`, local-time `HH:mm` labels (`datetimeUTC: false`), 6 ticks, axis ticks/border on, y-axis "mm" title, removed `layout: minimal` (it was hiding the axis), height 200px. Backup `.storage/lovelace.lovelace.bak.*`.
 
+### Windy card — marker & stray geolocation ping (2026-06-14)
+- **Marker fix:** set `marker=true` (was empty) and matched `lat/lon`+`detailLat/detailLon` to home (56.0637, 12.140). Zoom kept at 7 for regional incoming-weather view.
+- **Stray southern ping = Windy's IP-geolocation "blue dot".** Windy staff confirm it's driven by browser/IP localization and they can't disable it server-side (community topics 40899, 10's threads). Independent of URL coords.
+- **Central fix:** wrote a tiny custom card `www/local-cards/no-geo-iframe-card.js` (no deps) that renders the iframe with `allow="geolocation 'none'; gyroscope/magnetometer/accelerometer 'none'"` + `referrerpolicy=no-referrer`. Registered resource `/local/local-cards/no-geo-iframe-card.js` (module). Swapped the Klima Windy card `type: iframe` → `type: custom:no-geo-iframe-card` (kept url/title/aspect_ratio). Works for all devices. Needs a hard refresh after deploy.
+- Backups: `.storage/lovelace_resources.bak.*`, `.storage/lovelace.lovelace.bak.*`.
+
 ## TODO / open items
 - [ ] Fix or revive the cold-temperature automations (broken switch reference) and make sure cold-dock and rain-resume don't fight (resume re-checks dry but not temp).
 - [ ] Consider adding a temp condition to the resume action.
