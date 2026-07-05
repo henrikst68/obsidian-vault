@@ -88,3 +88,42 @@ Runtime note: unattended monitoring requires a persistent runtime on the Hetzner
 2. Connect the Pi MCP tool; capture WG config into [[TODO-document-wireguard-vpn]].
 3. Add Hetzner as a WG peer with tight `AllowedIPs`; verify it can reach HA over the tunnel only.
 4. Define per-agent HA token scoping; keep token off the bridge host.
+
+
+---
+
+## Hardening applied 2026-07-05 — verified
+
+Hetzner VPS (`178.104.150.20`) hardening completed and externally verified. Scripts live in `/root/harden-step{1,2,3}-*.sh` on the box.
+
+### Step 1 — fail2ban (done)
+- Installed; SSH jail at `/etc/fail2ban/jail.d/sshd.local`, `systemd` backend, 4 retries / 10 min → 1h ban, escalating (factor 2, max 1 week).
+- **Banned 7 active brute-forcers on startup** — password SSH exposure was live, not theoretical.
+
+### Step 2 — firewall / ufw, Option A (done, externally verified)
+- Default-deny inbound, allow outbound. Explicit allows: 22 (SSH), 80 + 443 (Caddy). v4 + v6.
+- **3100/3101 now Caddy-only**: dropped at the firewall for external traffic; Caddy still proxies them over localhost via `mcp.magleblik.dk` / `shell.magleblik.dk`.
+- Applied behind a 5-min `at` dead-man auto-rollback; cancelled after SSH confirmed working.
+- **Verified from an external client (Henrik's PC):** `178.104.150.20:3100` now times out (previously answered instantly). SSH from outside confirmed working. NB: testing port reachability *from the box itself* gave a false 404 — external verification is the trustworthy check.
+
+### Step 3 — SSH key-only (done, verified)
+- Drop-in `/etc/ssh/sshd_config.d/99-hardening.conf`: `PasswordAuthentication no`, `KbdInteractiveAuthentication no`, `PubkeyAuthentication yes`, `PermitRootLogin prohibit-password` (reported as `without-password`, functionally identical).
+- Guards: `sshd -t` validation + refuses if zero authorized_keys + `reload` not `restart` (sessions survive).
+- **Verified:** fresh key login as `adminhenrik` works with passwords disabled.
+
+### Access model now
+- `adminhenrik` (uid 1000): key login (ED25519 `SHA256:IAWE2jA+…`, dedicated key generated on Henrik's PC) + **passwordless sudo** via `/etc/sudoers.d/adminhenrik`. Key boundary = possession of the passphrase-protected private key.
+- `root`: key-only (ED25519 `SHA256:gANmiM2…`), retained as fallback.
+- Revert SSH hardening if ever needed: `rm /etc/ssh/sshd_config.d/99-hardening.conf && systemctl reload ssh`.
+
+### Checklist status (from project note)
+- [x] SSH key-only, password auth disabled, root restricted
+- [x] Firewall default-deny; only SSH + Caddy (WG port still to add later)
+- [x] unattended-upgrades (was already installed)
+- [x] fail2ban on SSH
+- [ ] WireGuard peer with tight `AllowedIPs` — pending Pi reachability
+
+### Still open / next
+- Read-only monitoring agent (the other half of the "safe, no-LAN-dependency" work) — not yet built.
+- Everything Pi-side (WG config capture, Hetzner-as-peer) — still blocked on Pi MCP connectivity.
+- Optional later: rebind node services to `127.0.0.1` (Option B) as defence-in-depth beyond the firewall.
