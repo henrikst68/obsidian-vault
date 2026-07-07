@@ -127,3 +127,17 @@ Hetzner VPS (`178.104.150.20`) hardening completed and externally verified. Scri
 - Read-only monitoring agent (the other half of the "safe, no-LAN-dependency" work) — not yet built.
 - Everything Pi-side (WG config capture, Hetzner-as-peer) — still blocked on Pi MCP connectivity.
 - Optional later: rebind node services to `127.0.0.1` (Option B) as defence-in-depth beyond the firewall.
+
+
+---
+
+## MCP access scope clarification (2026-07-07)
+
+Two separate Hetzner MCP endpoints exist and are easy to conflate:
+
+- **`mcp.magleblik.dk` (:3100) — Obsidian vault MCP.** Intentionally narrow: `read_note`, `write_note`, `list_directory`, frontmatter/tag tools only. No shell, no git. Scoped this way on purpose.
+- **`shell.magleblik.dk` (:3101) — Hetzner Shell MCP.** Runs `run_process` **as root** on `ubuntu-4gb-nbg1-1`. This is general-purpose OS access, not Obsidian-specific — confirmed 2026-07-07 (`whoami` → `root`; full systemctl/ufw/apt/journalctl/file access available).
+
+**Net effect: full root OS management of the Hetzner box is already available today via the Shell MCP.** No new connector, config, or capability grant is needed. What's *not* covered by either endpoint is the Pi (still blocked on Pi MCP connectivity per the blockers above) — that remains the actual gap, not Hetzner.
+
+Caveat: the Shell MCP has no built-in confirmation/approval gate — commands run immediately as root. The human-approval requirement for irreversible changes (key rotation, peer revocation, etc.) is a process Claude follows, not something enforced by the tool itself.
