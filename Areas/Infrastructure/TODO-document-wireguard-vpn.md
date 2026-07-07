@@ -45,3 +45,19 @@ Connectivity planning is now resolved in [[Home-Network-Agent-Project]]: the Het
 Verified from Hetzner side: `wg` command not installed, no WireGuard interface present (only `eth0`). Attempted curl from Hetzner to Pi HA (`192.168.1.2:8123`) timed out as expected — no tunnel exists.
 
 Despite the plan being agreed in [[Home-Network-Agent-Project]] (Hetzner as new peer on the Pi's WireGuard VPN), this was never executed. **Action needed:** actually add Hetzner as a peer so Claude/Hetzner-side tools can reach the Pi/HA — not just re-plan it again.
+
+---
+
+## Update 2026-07-07 — Hetzner WireGuard peer deployed and verified
+
+Hetzner is now a live peer on the Pi's WireGuard VPN (`10.241.173.6/24`, split-tunnel: `10.241.173.0/24, 192.168.1.0/24`). Deployed by Henrik on both ends per plan above; Claude generated keys/PSK and verified connectivity from the Hetzner shell.
+
+**Verified 2026-07-07:**
+- Handshake established (confirmed via `wg show` on both sides)
+- Ping to Pi tunnel IP (10.241.173.1): 0% loss
+- Ping to Pi LAN IP (192.168.1.2): 0% loss
+- HTTP to Home Assistant (192.168.1.2:8123): 200 OK
+
+**Result:** Claude can now reach Home Assistant directly from the Hetzner shell tool. The original blocker (Claude couldn't reach the Pi/HA except via the laptop-only pi-assistant tool) is resolved.
+
+**Still open (lower priority, from original checklist):** full WireGuard config documentation (peer list, key storage/backup policy, wg-easy or management UI decision) — not blocking, can be done at leisure.
