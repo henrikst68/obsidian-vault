@@ -37,3 +37,11 @@ Need a way to add peers **without being on the home LAN / SSH'd into the Pi loca
 Connectivity planning is now resolved in [[Home-Network-Agent-Project]]: the Hetzner VPS will be added as a **new WireGuard peer** to this existing Pi-hosted VPN (chosen over Tailscale and over exposing the HA API). The "create new VPN clients from external networks" task above is the mechanism needed to add that Hetzner peer without being on the LAN — same problem, tracked in both places.
 
 **Still open here (Pi-side capture — Claude cannot reach the Pi yet):** the entire config checklist above. To be filled once the Pi MCP tool is connected.
+
+---
+
+## Update 2026-07-07 — confirmed still not implemented
+
+Verified from Hetzner side: `wg` command not installed, no WireGuard interface present (only `eth0`). Attempted curl from Hetzner to Pi HA (`192.168.1.2:8123`) timed out as expected — no tunnel exists.
+
+Despite the plan being agreed in [[Home-Network-Agent-Project]] (Hetzner as new peer on the Pi's WireGuard VPN), this was never executed. **Action needed:** actually add Hetzner as a peer so Claude/Hetzner-side tools can reach the Pi/HA — not just re-plan it again.
