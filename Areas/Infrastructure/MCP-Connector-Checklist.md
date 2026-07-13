@@ -68,3 +68,20 @@ Note the `Hetzner Shell` connector (`shell.magleblik.dk` :3101) was **not** in t
 **Fix:** Henrik repointed both connectors; confirmed working again same session (clean `list_directory`/`read_note` calls with no errors after the fix).
 
 **Takeaway:** If a connector shows intermittent rather than total failure (some tool calls succeed, others error and then succeed on retry), that's a signal worth checking the proxy/connector target itself, not just auth or session-scope (see main checklist above).
+
+
+---
+
+## Decision 2026-07-13 — Hetzner Shell stays WireGuard/LAN-only, will not be re-exposed publicly
+
+**Context:** Henrik attempted to connect the claude.ai connector to `https://shell.magleblik.dk:3101` and it timed out. Root cause: the 2026-07-06/09 Hetzner `ufw` hardening default-denies everything except 22/80/443 — port 3101 is intentionally sealed from direct public access. This is consistent with, and reaffirms, the 2026-07-12 restore-access decision to leave shell-mcp off the public internet (unlike the vault and Pi connectors, which were migrated to the Caddy secret-path token pattern on 443).
+
+**Decision (confirmed by Henrik 2026-07-13):** Hetzner Shell will **not** be given a public Caddy front door, even behind a secret-path token. It remains reachable only from within the WireGuard/LAN mesh — i.e. from Henrik's own connected devices, not from claude.ai (which always connects from Anthropic's infrastructure and can never be a WireGuard peer).
+
+**Practical implication:** claude.ai sessions cannot use Hetzner Shell directly, full stop. For root-level Hetzner OS work initiated from a claude.ai chat, two fallback options exist:
+1. Route through the Pi (`pi.magleblik.dk:run_command`) and SSH from Pi → Hetzner over the existing WireGuard tunnel (Hetzner's WireGuard IP: `10.241.173.6`).
+2. Do that class of work from a surface that sits inside the network already (Claude Desktop/Code on a WireGuard/Tailscale-connected machine).
+
+**Tested 2026-07-13:** Option 1's network path is real — `ssh 10.241.173.6` from the Pi reaches Hetzner's SSH port cleanly over WireGuard (got to publickey auth), but auth fails: the Pi's `piadmin` key (`~/.ssh/id_ed25519` on the Pi) is not in `authorized_keys` for any account on the Hetzner box. So the fallback path is viable but not yet wired up — would require deliberately adding the Pi's public key to a Hetzner account's `authorized_keys`, which has not been done and should be a deliberate, approved step (it creates a new Pi→Hetzner access path), not something to set up silently.
+
+**Takeaway:** If a connector timeout traces back to a firewalled port rather than DNS/TLS/auth failure, check whether that port was intentionally excluded from the `ufw` allowlist before assuming it needs re-exposing — some restrictions (like this one) are deliberate security decisions, not gaps.
