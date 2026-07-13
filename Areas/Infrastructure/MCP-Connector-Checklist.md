@@ -55,3 +55,16 @@ The `pi-assistant` row above is stale. Verified this session:
 | pi.magleblik.dk | Raspberry Pi MCP (`run_command`) | **Connected and working.** Backed by `mcp-server.service` on the Pi, port 8765. Confirmed via `whoami`/`hostname` returning real Pi values (`piadmin@pi`, `192.168.1.2`). The earlier RFC1918-egress-block caveat no longer applies to this connector specifically, since it's reached via its own public hostname/token, not a direct sandbox-to-LAN route. |
 
 Note the `Hetzner Shell` connector (`shell.magleblik.dk` :3101) was **not** in the active connector list for this session — only the vault connector (`Hetzner MCP`, notes-only) was available. Don't assume Shell access is present without checking the session's tool list first.
+
+
+---
+
+## Incident 2026-07-13 — connectors pointed to localhost
+
+**Symptom:** Both the Hetzner MCP (vault, `mcp.magleblik.dk`) and `pi.magleblik.dk` connectors stopped working. In-session testing showed partial/intermittent failures rather than a clean refuse — `get_vault_stats` and `get_frontmatter` succeeded while `read_note`/`list_directory` errored, then succeeded on retry — consistent with requests intermittently landing on the wrong target.
+
+**Cause:** Both the Hetzner and Pi MCP connectors were pointed to `localhost` (exact layer — Caddy `reverse_proxy` target vs. the connector URL definition itself — not confirmed; note here if it becomes clear later).
+
+**Fix:** Henrik repointed both connectors; confirmed working again same session (clean `list_directory`/`read_note` calls with no errors after the fix).
+
+**Takeaway:** If a connector shows intermittent rather than total failure (some tool calls succeed, others error and then succeed on retry), that's a signal worth checking the proxy/connector target itself, not just auth or session-scope (see main checklist above).
