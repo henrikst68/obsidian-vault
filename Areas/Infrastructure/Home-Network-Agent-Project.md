@@ -141,3 +141,25 @@ Two separate Hetzner MCP endpoints exist and are easy to conflate:
 **Net effect: full root OS management of the Hetzner box is already available today via the Shell MCP.** No new connector, config, or capability grant is needed. What's *not* covered by either endpoint is the Pi (still blocked on Pi MCP connectivity per the blockers above) — that remains the actual gap, not Hetzner.
 
 Caveat: the Shell MCP has no built-in confirmation/approval gate — commands run immediately as root. The human-approval requirement for irreversible changes (key rotation, peer revocation, etc.) is a process Claude follows, not something enforced by the tool itself.
+
+
+---
+
+## Infra audit 2026-07-13 — corrections to prior status
+
+Ground-truth check via the now-working `pi.magleblik.dk` MCP connector found this note out of date in two places:
+
+- **Pi MCP connector: now connected and working.** `mcp-server.service` ("Claude MCP Server") runs on the Pi as `piadmin`, port 8765, confirmed via `whoami`/`hostname`. The "Pi not reachable" blocker is resolved. [[MCP-Connector-Checklist]] updated to match.
+- **Hetzner WireGuard peer: already added and active.** `/etc/wireguard/wg0.conf` on the Pi has a `Hetzner` peer (`AllowedIPs = 10.241.173.6/32` — tight, as planned) with a live handshake from `178.104.150.20`. The "Add Hetzner as a WG peer" next-action is done. Not confirmed from the Hetzner side in this session (no Hetzner Shell connector active) — worth a from-Hetzner check next time that connector is available.
+
+### Also found, out of scope for this project
+A separate, pre-existing Tailscale Funnel + Caddy webapp stack on the Pi (Supabase, AITrainingCoach, Craniolog) — predates this project, built before the vault was used for documentation. Now written up at [[Pi-Webapp-Hosting-Tailscale]]. It's a second public ingress path into the Pi that wasn't accounted for in this project's "Hetzner as sole public ingress" security model — flagged there, not resolved yet.
+
+### Newly found gap: no firewall on the Pi
+`ufw` isn't installed on the Pi at all. Every service bound to `0.0.0.0` — SSH, FTP (port 21, purpose unclear, possibly unused legacy), lighttpd (port 80, empty config, purpose unclear), MQTT, Home Assistant, the MCP server, Supabase Kong — is open to the whole LAN and the Tailscale mesh. The Hetzner box got a default-deny firewall during the 2026-07-05 hardening pass; the Pi never did. Added to next actions below.
+
+### Updated next actions
+1. Add a default-deny firewall (`ufw`) on the Pi, allow only what's actually needed
+2. Confirm/disable unused legacy services on the Pi (FTP, lighttpd) — pending Henrik's input on whether they're still needed
+3. Decide on the Tailscale Funnel stack's place in the security model (see [[Pi-Webapp-Hosting-Tailscale]])
+4. Define per-agent Home Assistant token scoping (still open, not yet started)

@@ -42,3 +42,16 @@ For each surface actually in use, confirm the relevant connectors are toggled on
 ## Rule of thumb going forward
 
 When a new connector is added to the account, add it to every surface's picker in the same sitting rather than assuming it propagates. If a Claude session reports "I don't have access to X," treat that as **session-scoped**, not account-scoped, until checked here.
+
+
+---
+
+## Update 2026-07-13
+
+The `pi-assistant` row above is stale. Verified this session:
+
+| Connector | What it is | Notes |
+|---|---|---|
+| pi.magleblik.dk | Raspberry Pi MCP (`run_command`) | **Connected and working.** Backed by `mcp-server.service` on the Pi, port 8765. Confirmed via `whoami`/`hostname` returning real Pi values (`piadmin@pi`, `192.168.1.2`). The earlier RFC1918-egress-block caveat no longer applies to this connector specifically, since it's reached via its own public hostname/token, not a direct sandbox-to-LAN route. |
+
+Note the `Hetzner Shell` connector (`shell.magleblik.dk` :3101) was **not** in the active connector list for this session — only the vault connector (`Hetzner MCP`, notes-only) was available. Don't assume Shell access is present without checking the session's tool list first.
