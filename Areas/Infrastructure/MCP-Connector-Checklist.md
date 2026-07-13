@@ -85,3 +85,20 @@ Note the `Hetzner Shell` connector (`shell.magleblik.dk` :3101) was **not** in t
 **Tested 2026-07-13:** Option 1's network path is real — `ssh 10.241.173.6` from the Pi reaches Hetzner's SSH port cleanly over WireGuard (got to publickey auth), but auth fails: the Pi's `piadmin` key (`~/.ssh/id_ed25519` on the Pi) is not in `authorized_keys` for any account on the Hetzner box. So the fallback path is viable but not yet wired up — would require deliberately adding the Pi's public key to a Hetzner account's `authorized_keys`, which has not been done and should be a deliberate, approved step (it creates a new Pi→Hetzner access path), not something to set up silently.
 
 **Takeaway:** If a connector timeout traces back to a firewalled port rather than DNS/TLS/auth failure, check whether that port was intentionally excluded from the `ufw` allowlist before assuming it needs re-exposing — some restrictions (like this one) are deliberate security decisions, not gaps.
+
+
+---
+
+## Correction 2026-07-13 (later same day) — Shell IS reachable over WireGuard; earlier test was a false negative
+
+**Correction to the "Decision 2026-07-13" entry above:** that entry stated the WireGuard path to shell-mcp (3101) timed out and was "unreachable even over WireGuard." That was based on a single test and was wrong — retested properly with `tcpdump` verification on the Hetzner side:
+
+- First attempt from Pi → `10.241.173.6:3101`: timed out (the original false-negative result)
+- Immediately retested (3x in a row): all succeeded cleanly
+- `tcpdump -ni wg0 port 3101` on the Hetzner side confirmed a full clean TCP handshake (SYN/SYN-ACK/ACK), data exchange, and graceful FIN teardown on both sides during a successful attempt
+
+**Root cause of the false negative:** not identified with certainty — likely a transient blip (stale conntrack entry, WireGuard keepalive/handshake timing, or similar), not a structural firewall or service issue. `ufw status verbose` confirmed the rule `3101/tcp on wg0 ALLOW IN` is present and correctly scoped, identical in form to the working 3100 rule. `ss -tlnp` confirmed shell-mcp (`supergateway`, pid 873030) listening on `*:3101`. Local `curl 127.0.0.1:3101` returned a healthy 404 (expected for `GET /` on an MCP server). `fail2ban` only jails `sshd`, not relevant here.
+
+**Corrected conclusion:** The "WireGuard/LAN-only" model for Hetzner Shell is actually implemented correctly and working — any device that is a genuine WireGuard peer (Pi, Henrik's own laptop/phone with the WireGuard client, etc.) can reach `10.241.173.6:3101` reliably. The distinction that matters is: claude.ai sessions are **never** WireGuard peers (Anthropic's infrastructure cannot join the tunnel and cannot route to RFC1918 addresses like `10.241.173.6` at all), so this remains permanently unreachable from claude.ai regardless of the service's own health — but it was wrong to describe the LAN path itself as broken.
+
+**Takeaway:** A single failed connectivity test is not sufficient to conclude a service or firewall rule is broken — retest 2-3x before writing up a root cause, especially given the pattern of intermittent (not hard) failures seen elsewhere today (see the localhost-misconfiguration incident above).
