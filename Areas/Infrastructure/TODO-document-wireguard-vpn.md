@@ -61,3 +61,25 @@ Hetzner is now a live peer on the Pi's WireGuard VPN (`10.241.173.6/24`, split-t
 **Result:** Claude can now reach Home Assistant directly from the Hetzner shell tool. The original blocker (Claude couldn't reach the Pi/HA except via the laptop-only pi-assistant tool) is resolved.
 
 **Still open (lower priority, from original checklist):** full WireGuard config documentation (peer list, key storage/backup policy, wg-easy or management UI decision) — not blocking, can be done at leisure.
+
+
+---
+
+## Update 2026-07-25 — three new peers added (SamsungS24, Yoga, Asus)
+
+**Decision:** Henrik requested WireGuard access for 3 additional devices (Samsung S24 phone, Yoga laptop, Asus laptop) so they can reach `shell.magleblik.dk:3101` and other WireGuard/LAN-only services from anywhere, while staying within the existing security scope (LAN or VPN-into-LAN only — never public/direct exposure).
+
+**Reasoning:** `shell.magleblik.dk:3101` remains firewalled to `wg0` only (unchanged). Adding devices as WireGuard peers extends the trusted mesh (same pattern as existing `HenrikMobil`/`DortheMobil`/`DortheIpad`/`Hetzner` peers) rather than opening the port to the public interface. Devices reach the tunnel via the home public IP as rendezvous only; once connected they are functionally on the internal network — no direct/public path to 3101 exists at any point.
+
+**Corrected finding during this work:** confirmed no DDNS mechanism exists on the Pi (checked crontab, systemd units, common config paths — none found). `vpn/wg/wireguard/home.magleblik.dk` subdomains resolve to `94.231.109.98`, which does NOT match the Pi's actual WAN IP (`90.185.97.137` at time of writing) — likely a Simply.com parking/wildcard record, not a real endpoint. **Risk:** if the home ISP assigns a dynamic IP and it changes, all WireGuard peers (existing and new) using the hardcoded public IP as Endpoint will lose connectivity until configs are updated. No DDNS or dynamic-endpoint mechanism currently exists to handle this. Flagging as a follow-up item — not fixed in this change.
+
+**What was done:**
+- Backed up `/etc/wireguard/wg0.conf` before editing (`wg0.conf.bak-<timestamp>`, two backups taken)
+- Generated keypair + PSK per device via `wg genkey` / `wg pubkey` / `wg genpsk` on the Pi
+- Appended 3 new `[Peer]` blocks to server config, IPs `10.241.173.7` (SamsungS24), `.8` (Yoga), `.9` (Asus)
+- Applied live via `wg syncconf` (no interface bounce — existing peer sessions were not interrupted, confirmed via unbroken handshake timers post-change)
+- Generated client `.conf` files (Endpoint `90.185.97.137:51820`, split-tunnel `AllowedIPs = 10.241.173.0/24, 192.168.1.0/24`, `PersistentKeepalive = 25`), delivered to Henrik for import; not stored in the vault (contain private keys/PSKs)
+
+**Prior hold lifted:** Henrik had previously instructed Claude not to touch the Pi WireGuard config; this hold was explicitly lifted by Henrik on 2026-07-25 for this specific change.
+
+**Note:** there is a disabled/commented `pi` peer entry (`10.241.173.3`) already present in `wg0.conf`, untouched by this change — origin/purpose not investigated here.
