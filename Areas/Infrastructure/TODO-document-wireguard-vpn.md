@@ -83,3 +83,28 @@ Hetzner is now a live peer on the Pi's WireGuard VPN (`10.241.173.6/24`, split-t
 **Prior hold lifted:** Henrik had previously instructed Claude not to touch the Pi WireGuard config; this hold was explicitly lifted by Henrik on 2026-07-25 for this specific change.
 
 **Note:** there is a disabled/commented `pi` peer entry (`10.241.173.3`) already present in `wg0.conf`, untouched by this change — origin/purpose not investigated here.
+
+
+---
+
+## Update 2026-07-25 — verified end-to-end, root cause found and fixed
+
+**Test:** `Test-NetConnection -ComputerName 10.241.173.6 -Port 3101` from Yoga (`10.241.173.8`).
+
+**First attempt failed** (`TcpTestSucceeded: False`) despite a successful WireGuard handshake and correct client-side routing (`SourceAddress: 10.241.173.8` confirmed tunnel interface was correctly selected).
+
+**Root cause:** Pi's `iptables` FORWARD chain had rules for `eth0 ↔ wg0` (LAN-to-tunnel) traffic only — no rule permitted `wg0 ↔ wg0` traffic, i.e. one WireGuard peer routing to another *through* the Pi. Default FORWARD policy is DROP. This gap predates this change; it just was never exercised before because no prior peer needed peer-to-peer routing (Hetzner and mobile peers only ever talked to the Pi itself or the LAN, never to each other).
+
+**Fix applied:**
+```
+sudo iptables -I FORWARD -i wg0 -o wg0 -s 10.241.173.0/24 -d 10.241.173.0/24 -j ACCEPT
+```
+Inserted as rule #1 (before DOCKER-USER/DOCKER-FORWARD/ts-forward jump chains). Scoped narrowly to tunnel-subnet-to-tunnel-subnet only — does not open general forwarding.
+
+Backed up `/etc/iptables/rules.v4` before saving, then persisted via `netfilter-persistent save` (survives reboot). Confirmed the rule was written correctly and in the right order in the saved ruleset.
+
+**Verified:** retest from Yoga succeeded (`TcpTestSucceeded: True`). Confirmed on the Pi side that the new rule's packet counter incremented (13 pkts / 772 bytes) matching the test traffic — not a coincidental pass.
+
+**Side effect (beneficial):** this also fixes peer-to-peer routing for the existing mobile peers (HenrikMobil, DortheMobil, DortheIpad) to Hetzner, which was silently broken the same way but never tested until now.
+
+**Status: resolved.** SamsungS24, Yoga, Asus can all reach `shell.magleblik.dk:3101` (and anything else on `wg0`/LAN) from anywhere, exclusively through the WireGuard tunnel — no public/direct path exists at any point, per the required security scope.
