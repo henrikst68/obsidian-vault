@@ -102,3 +102,36 @@ Note the `Hetzner Shell` connector (`shell.magleblik.dk` :3101) was **not** in t
 **Corrected conclusion:** The "WireGuard/LAN-only" model for Hetzner Shell is actually implemented correctly and working — any device that is a genuine WireGuard peer (Pi, Henrik's own laptop/phone with the WireGuard client, etc.) can reach `10.241.173.6:3101` reliably. The distinction that matters is: claude.ai sessions are **never** WireGuard peers (Anthropic's infrastructure cannot join the tunnel and cannot route to RFC1918 addresses like `10.241.173.6` at all), so this remains permanently unreachable from claude.ai regardless of the service's own health — but it was wrong to describe the LAN path itself as broken.
 
 **Takeaway:** A single failed connectivity test is not sufficient to conclude a service or firewall rule is broken — retest 2-3x before writing up a root cause, especially given the pattern of intermittent (not hard) failures seen elsewhere today (see the localhost-misconfiguration incident above).
+
+
+---
+
+## 2026-07-25 — Hetzner Shell reachable from Claude Desktop via local MCP (resolved)
+
+**Problem:** `shell.magleblik.dk:3101` could not be added as a connector in claude.ai / Claude Desktop connector settings — failed with "Couldn't register with Hetzner Shell's sign-in service" (OAuth registration errors, refs `ofid_4a9fe9b726534009`, `ofid_9e0b1e636f0fffeb`).
+
+**Root cause:** Remote/URL connectors are fetched by **Anthropic's cloud servers**, not by the local device — regardless of whether the Claude Desktop app itself is running on the home LAN. Since 3101 is firewalled to `wg0` only, Anthropic's cloud cannot reach it, so OAuth discovery fails before any sign-in can occur. This is the firewall working as designed, not a fault.
+
+**Solution:** use a **local MCP server entry** in Claude Desktop (`%APPDATA%\Claude\claude_desktop_config.json`) instead of a remote connector. Local entries spawn a process on the device itself, so the outbound call originates from that machine (e.g. Yoga) over WireGuard — never through Anthropic's cloud. Public exposure rule remains intact.
+
+**Working config pattern (Windows):**
+```
+"hetzner-shell": {
+  "command": "cmd",
+  "args": ["/c","npx","-y","mcp-remote","http://10.241.173.6:3101/mcp","--transport","http-only","--allow-http"]
+}
+```
+Same pattern for the vault on port 3100 (`mcpvault` v0.11.0), if direct-over-tunnel access is wanted (otherwise the `mcp.magleblik.dk` remote connector already covers it).
+
+**Gotchas found (all real, all cost time):**
+- `--allow-http` is **required**: `mcp-remote` refuses plain HTTP for non-localhost targets ("Non-HTTPS URLs are only allowed for localhost or when --allow-http flag is provided"). Plain HTTP is acceptable here because traffic rides inside the encrypted WireGuard tunnel.
+- Service on 3101 is **plain HTTP (Express), not HTTPS** — the previously configured `https://shell.magleblik.dk:3101` connector URL was wrong regardless of firewall.
+- Endpoint path is `/mcp`, streamable HTTP (`GET` returns 405, `POST` initialize succeeds). Server: `mcp-server-commands` v0.8.2.
+- Must use tunnel IP `10.241.173.6`, not the hostname — `shell.magleblik.dk` resolves to the public IP, which is firewalled.
+- Prior config used `http://localhost:3101/mcp`, which worked 2026-07-09 (~24 tool calls) then failed with ECONNREFUSED from 07-10 onward — something was forwarding localhost:3101 on Yoga (likely a manual SSH tunnel) and stopped. Tunnel IP removes that dependency.
+
+**Verified 2026-07-25:** `run_process` from Claude Desktop on Yoga returned `hostname: ubuntu-4gb-nbg1-1`, IPs `178.104.150.20` + `10.241.173.6`, uptime 56 days.
+
+**Corrected security finding:** shell-mcp does **not** run as root (earlier claim in this session was wrong). It runs as `uid=996(shell-mcp) gid=987(shell-mcp)`, no supplementary groups, with the `no_new_privs` flag set — sudo escalation is blocked. Exposure to tunnel peers is an unprivileged shell, not root.
+
+**Scope note:** this works only in Claude Desktop on machines where the config is installed (Yoga, and Asus if replicated). It does **not** work in the phone app or claude.ai in a browser — those route through Anthropic's cloud and will never reach a WireGuard-only port.
