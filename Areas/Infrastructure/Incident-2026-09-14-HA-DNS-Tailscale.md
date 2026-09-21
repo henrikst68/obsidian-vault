@@ -37,3 +37,16 @@ tags:
 
 ## Lesson
 HA DNS must not depend on Tailscale. Container DNS is now pinned explicitly.
+
+## Update 2026-09-21 — Tailscale restored
+- Henrik re-authenticated the Pi; admin console shows `pi` Connected, 1.102.4, **key expiry disabled**, Funnel on.
+- Verified: tailscaled `Connected`; `https://pi.tail63e8cd.ts.net` → HTTP 200 3/3.
+- Side effect found: with accept-dns (CorpDNS) on, Tailscale rewrote host `/etc/resolv.conf` to `100.100.100.100`. Bridge containers (via 127.0.0.11) and host-net `pihole`, `matter-server` still depend on MagicDNS. HA is pinned and unaffected.
+- Proposed, not yet applied: `sudo tailscale set --accept-dns=false` on Pi, then restart the affected containers. Awaiting Henrik's approval.
+
+## Separate issue found 2026-09-21 — Netatmo API restricted
+- All Netatmo endpoints (getstationsdata, homesdata, addwebhook) return 429 / code 29 "Access temporarily restricted". Token (Nabu Casa cloud auth) is valid.
+- Last valid Netatmo reading: 2026-09-13 02:44 UTC — before the DNS outage, so an independent fault. Original trigger unknown (logs lost on container recreate/restarts).
+- Likely sustained by repeated integration reloads (`automation.netatmo_auto_reload`, max 1 per 30 min) and HA restarts.
+- Proposed: disable the auto-reload automation, no restarts/reloads, re-test with a single API call after a few hours, then one reload.
+- Automower: `binary_sensor.automower_rain_imminent` reads off while Netatmo is unavailable → fail-safe-wet change recommended again.
