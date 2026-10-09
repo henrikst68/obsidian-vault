@@ -1,7 +1,11 @@
 ---
-date: 2026-10-09
+date: 2026-10-09T00:00:00.000Z
 status: open-diagnosed
-tags: [incident, home-assistant, tado, matter]
+tags:
+  - incident
+  - home-assistant
+  - tado
+  - matter
 ---
 # Incident: Tado integration down since 2026-09-21, Matter devices dead since Feb 2025
 
@@ -35,3 +39,13 @@ tags: [incident, home-assistant, tado, matter]
 3. Do not approve further Tado reauth in HA until the cause is fixed: each attempt fails the same way.
 
 No changes were made on the Pi during this diagnosis.
+
+
+## Update 2026-10-09 23:3x: read-only check result (separate device login, nothing stored, HA untouched)
+- Home 1761665 is the only home on the account (index 0), same id as the HA config entry.
+- Tado reports `generation: LINE_X` for the home. PyTado therefore uses the X-line API, which returns devices with `serialNumber` and no `shortSerialNo` -> HA 2026.3.2 core integration fails with KeyError at setup. This is confirmed, not inferred.
+- Device list: 10 devices (8x VA04, 2x SU04) + 1 non-dict list entry (shape differs; probably the bridge). VA04/SU04 are the Tado X thermostat/sensor models, i.e. the SAME 10 physical devices as the 10 Matter nodes (8 thermostats + 2 sensors). Earlier assumption that cloud and Matter devices were different hardware was wrong.
+- 7 zones returned (keys: roomId, roomName, devices, zoneControllers, ...).
+- Henrik does not recall any change on the Tado side. Most likely Tado changed the home/API (generation) or the legacy fields it still served; the already-running HA process kept its old API object until the container was recreated on 2026-09-21, which forced a fresh setup. Exact flip date unknown (between 2026-07-17 and 2026-09-21).
+- Consequence: the core Tado integration cannot work for this home until HA adds X-line support. Supported path per HA docs = Matter. Matter needs recommissioning of the 10 devices (old fabric key lost).
+- Cleanup: check script and log removed from the Pi, plus my earlier temp copies /tmp/er.json and /tmp/st_m.json.
