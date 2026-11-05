@@ -40,3 +40,13 @@ Run by Claude from claude.ai via `pi.magleblik.dk:run_command`. Hetzner verified
 - GitHub runner: container and `/opt/apps/github-runner` removed since 2026-10-04; no PAT strings found under /opt/apps.
 - Mosquitto: `allow_anonymous false` with password file.
 - filament-manager (:8770, new since last check): LAN/WG only, serves UI without auth.
+
+
+## 2026-11-05 07:10 — Finding 1 fixed (nftables guard)
+- Pre-check: only established peer on :8765 was 10.241.173.6 (Hetzner Caddy upstream).
+- Rule file: `/etc/nftables.d/mcp-guard.nft`, separate table `inet mcp_guard` (input hook, priority -10, policy accept): tcp/8765 accept from `lo` and `10.241.173.6`, else counter drop. Does not touch Docker/Tailscale iptables-nft tables.
+- Applied with a 5-min auto-rollback timer (`mcp-guard-rollback`); connector verified working, timer cancelled.
+- Persistence: `mcp-guard.service` (oneshot, enabled, ordered before network-pre and mcp-server.service). `systemctl stop mcp-guard` removes the table.
+- Verification: probe from craniolog container (172.19.0.2, bridge) → blocked, drop counter 4 packets. Self-probes from the Pi to 192.168.1.2/10.241.173.1 go via `lo` and are allowed by design — not a valid test.
+- Not yet tested from a physical LAN device or a family WG peer; expected to be dropped (non-lo, saddr not .6).
+- Residual: `piadmin` still has NOPASSWD sudo and the app still has no auth — security now depends on Hetzner Caddy auth + this rule. Rollback: `sudo systemctl disable --now mcp-guard`.
