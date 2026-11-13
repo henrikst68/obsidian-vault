@@ -64,7 +64,13 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 | 15 | 100 g | 13 | 19.4 | 38 | 45 | 0.84 g/s | Still slow |
 | 16 | 100 g | 15 | 19.0 | 39 | 35 | 1.11 g/s | 1:2.05. Not sour, but a bit too much acidity. Close to target |
 
-Next test: 93 °C, grind 15, 34–35 s, to round off the acidity (one change).
+| 17 | topped up | 15 | 18.6 | 40 | 35 | 1.14 g/s | 93 °C. 1:2.15. Less acidity than #16 |
+
+- 93 °C confirmed as better than 92 °C for this blend
+- Hopper was topped up before #17, so the 18.6 g dose is normal variation (±0.3 g), not popcorning
+- Hopper minimum not yet known. Test: fill to 100 g, keep settings fixed, log dose per shot without topping up. A clear dose drop (< ~18.7 g) marks the limit. Until known, top up below ~60 g
+
+**Current setting, loaded hopper: grind 15, 93 °C, ~35 s → ~39–40 g**
 
 ### Finding: hopper load changes the grind
 - With a loaded hopper the bean weight feeds the burrs evenly: finer, more even grind, denser puck, higher dose
