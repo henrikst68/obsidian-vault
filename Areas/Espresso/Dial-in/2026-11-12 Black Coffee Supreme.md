@@ -70,7 +70,18 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 - Hopper was topped up before #17, so the 18.6 g dose is normal variation (±0.3 g), not popcorning
 - Hopper minimum not yet known. Test: fill to 100 g, keep settings fixed, log dose per shot without topping up. A clear dose drop (< ~18.7 g) marks the limit. Until known, top up below ~60 g
 
-**Current setting, loaded hopper: grind 15, 93 °C, ~35 s → ~39–40 g**
+| 18 | ~80 g | 15 | 18.6 | 43 | 25 | 1.72 g/s | 93 °C. Bit too sour, not bad. Even flow, no channeling |
+| 19 | ~60 g | 15 | 18.4 | 43 | 22 | 1.95 g/s | 93 °C |
+| 20 | fresh room-temp beans, purged | 15 | 18.4 | 41 | 24 | 1.71 g/s | 93 °C |
+
+### Open issue: flow jumped between #17 (08:37) and #18 (08:41)
+- Same settings, flow went from ~1.1 to ~1.7–1.95 g/s and dose dropped 19.0 → 18.4 g. Looks like a coarser grind (about 5 grind steps)
+- Ruled out: channeling (even flow), temperature setting, hopper level, warm beans in hopper (#20 with fresh beans still fast)
+- Burr thermal expansion: estimated ~10 µm for 20 °C, and inner/outer burr growth partly cancel. Too small and too slow for a step change in 4 minutes, but not fully ruled out
+- Remaining: grinder warming over the session, or mechanical change (upper burr seat)
+- Tests: (1) grind 13 now, check if flow returns to ~1.1 g/s; (2) next morning cold start, 100 g hopper, grind 15 — starts at ~1.1 g/s and drifts = warming; starts fast = something moved in grinder
+
+**Current setting, loaded hopper: grind 15, 93 °C, ~35 s → ~39–40 g** (valid for #16–17; under review after #18–20)
 
 ### Finding: hopper load changes the grind
 - With a loaded hopper the bean weight feeds the burrs evenly: finer, more even grind, denser puck, higher dose
