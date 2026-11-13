@@ -18,7 +18,7 @@ Back to [[Areas/Espresso/README|Espresso]]
 - Storage: Airscape canister. About 20 g (one dose) weighed into the hopper per shot
 
 ## Machine behaviour (Sage Oracle Touch)
-- Dose is time-based. A finer grind gives a slightly lower dose (about 0.2 g per step)
+- Dose is set by a fill sensor: the grinder stops when the basket is full (corrected 2026-11-13, earlier assumed time-based). Finer, more even grounds pack denser, so a finer grind gives a higher dose. The grind setting controls both dose and flow
 - Auto tamp. Shot stop set to **time**, not volume
 - Manual brew mode: the display switches between stop info and seconds, so time is hard to read. Use the scale timer or a phone stopwatch
 - No pressure reading available
@@ -55,7 +55,29 @@ Temperature set to 92 °C at the end of the session.
 - Grind **11**, dose ~19 g, timed stop **27 s** → ~38 g (1:2)
 - Temperature: 92 °C (changed at end of session, not yet tested at this setting)
 
-## Next steps (2026-11-13)
+## Session 2026-11-13 (morning) — loaded hopper
+Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 °C.
+
+| # | Hopper | Grind | Dose | Yield | Time | Flow | Taste / note |
+|---|---|---|---|---|---|---|---|
+| 14 | 100 g | 11 | 20.7 | 36 | 65 | 0.55 g/s | Choked |
+| 15 | 100 g | 13 | 19.4 | 38 | 45 | 0.84 g/s | Still slow |
+| 16 | 100 g | 15 | 19.0 | 39 | 35 | 1.11 g/s | On target (1:2.05), matches reference shot #3 |
+
+### Finding: hopper load changes the grind
+- With a loaded hopper the bean weight feeds the burrs evenly: finer, more even grind, denser puck, higher dose
+- With single dosing (~20 g in hopper) the last beans bounce on the burrs (popcorning): coarser grind, lower dose
+- **Grind 11 with single dosing ≈ grind 15 with a loaded hopper**
+- The choked first shots on 2026-11-12 (#1–2) were the same effect: full hopper, 20 g dose. Not a "first shot of the day" or retained-grounds effect
+- Rule: pick one mode and dial in for that mode
+
+### Settings per mode
+| Mode | Grind | Dose | Timed stop | Yield |
+|---|---|---|---|---|
+| Single dose (~20 g) | 11 | ~19 g | 27 s | ~38 g |
+| Loaded hopper (~100 g) | 15 | ~19 g | 34–35 s | ~38–39 g |
+
+## Next steps (from 2026-11-12, partly superseded)
 1. Purge a few grams before the first shot
 2. Baseline: grind 11, 27 s, 92 °C. Compare with shot #13 (93 °C)
 3. Then grind 10, timed stop ~30–31 s, target 37–39 g, for more contact time and sweetness
