@@ -85,7 +85,9 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 | 22 | 10:58 | 15 | 18.0 | 36 | 17 | 2.1 g/s | After cleaning and reseating upper burr |
 | 23 | 11:09 | 15 | 18.5 | 39 | 20 | 1.95 g/s | After cleaning tamp fan |
 
-(For #21–23 the "Hopper" column shows the time of the shot.)
+| 24 | 11:15 | 10 | 19.0 | 40 | 26 | 1.54 g/s | Grinder responds: dose up, flow down. Whole scale shifted ~5 steps vs 08:00 |
+
+(For #21–24 the "Hopper" column shows the time of the shot.)
 
 ### Troubleshooting status (2026-11-13, 11:10)
 All beans today came from the Airscape (same bag). Machine on since ~07:45.
