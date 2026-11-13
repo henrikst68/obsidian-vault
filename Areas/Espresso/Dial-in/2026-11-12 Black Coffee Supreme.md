@@ -81,7 +81,35 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 - Remaining: grinder warming over the session, or mechanical change (upper burr seat)
 - Tests: (1) grind 13 now, check if flow returns to ~1.1 g/s; (2) next morning cold start, 100 g hopper, grind 15 — starts at ~1.1 g/s and drifts = warming; starts fast = something moved in grinder
 
-**Current setting, loaded hopper: grind 15, 93 °C, ~35 s → ~39–40 g** (valid for #16–17; under review after #18–20)
+| 21 | 10:44 | 13 | 18.6 | 58 | 25 | 2.32 g/s | Finer setting, but faster flow and no dose increase |
+| 22 | 10:58 | 15 | 18.0 | 36 | 17 | 2.1 g/s | After cleaning and reseating upper burr |
+| 23 | 11:09 | 15 | 18.5 | 39 | 20 | 1.95 g/s | After cleaning tamp fan |
+
+(For #21–23 the "Hopper" column shows the time of the shot.)
+
+### Troubleshooting status (2026-11-13, 11:10)
+All beans today came from the Airscape (same bag). Machine on since ~07:45.
+
+Ruled out:
+- Beans (same bag, same source all day)
+- Hopper level and warm beans in hopper (#20, fresh room-temp beans, still fast)
+- Brew temperature (92 vs 93 °C, same flow)
+- Channeling (even flow in bottomless portafilter)
+- Upper burr seating (cleaned and reseated, no change)
+- Grind adjustment (grind 5 vs 25 gives a clear difference in the grounds)
+- Tamp fan (cleaned, no problem found, setting never changed)
+- Scale (yield difference clearly visible in the cup)
+
+Not ruled out:
+- Grinder or machine drift as it stays on (warming). Burr expansion estimate argues against a large effect, but the cause appears after ~1 hour of use
+- Pump pressure or pre-infusion behaviour (no pressure reading available)
+- An internal grinder fault not visible from outside
+
+Next:
+1. For drinkable coffee today: grind 9–10, manual brew, stop at ~38 g
+2. Cold-start test next morning: machine cold, 100 g in hopper, grind 15, 93 °C, same as #16. Back at ~1.1 g/s = something drifts while the machine runs. Still fast = fault, contact Sage service with this log
+
+**Setting grind 15, 93 °C, ~35 s → ~39–40 g was valid for #16–17 only. Under review.**
 
 ### Finding: hopper load changes the grind
 - With a loaded hopper the bean weight feeds the burrs evenly: finer, more even grind, denser puck, higher dose
