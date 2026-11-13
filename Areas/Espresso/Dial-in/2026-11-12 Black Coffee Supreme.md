@@ -87,7 +87,11 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 
 | 24 | 11:15 | 10 | 19.0 | 40 | 26 | 1.54 g/s | Grinder responds: dose up, flow down. Whole scale shifted ~5 steps vs 08:00 |
 
-(For #21–24 the "Hopper" column shows the time of the shot.)
+| 25 | 11:23 | 8 | 19.3 | 39 | 36 | 1.08 g/s | Back on target (1:2.02). Matches #16 at grind 15 → offset ~7 steps since 08:00. Slightly bitter, drinkable. Next: grind 9 (~30–32 s) |
+
+(For #21–25 the "Hopper" column shows the time of the shot.)
+
+**Working setting at 11:23 (machine on ~3.5 h): grind 8, 93 °C, ~36 s → ~39 g.** Compare with tomorrow's cold start at grind 15.
 
 ### Troubleshooting status (2026-11-13, 11:10)
 All beans today came from the Airscape (same bag). Machine on since ~07:45.
