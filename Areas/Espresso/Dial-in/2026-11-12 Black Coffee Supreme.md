@@ -62,7 +62,9 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 |---|---|---|---|---|---|---|---|
 | 14 | 100 g | 11 | 20.7 | 36 | 65 | 0.55 g/s | Choked |
 | 15 | 100 g | 13 | 19.4 | 38 | 45 | 0.84 g/s | Still slow |
-| 16 | 100 g | 15 | 19.0 | 39 | 35 | 1.11 g/s | On target (1:2.05), matches reference shot #3 |
+| 16 | 100 g | 15 | 19.0 | 39 | 35 | 1.11 g/s | 1:2.05. Not sour, but a bit too much acidity. Close to target |
+
+Next test: 93 °C, grind 15, 34–35 s, to round off the acidity (one change).
 
 ### Finding: hopper load changes the grind
 - With a loaded hopper the bean weight feeds the burrs evenly: finer, more even grind, denser puck, higher dose
