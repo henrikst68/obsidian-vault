@@ -99,6 +99,7 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 | 26 | 08:11, cold machine | 15 | 19.0 | 39 | 38 | 1.03 g/s | 100 g in hopper, 93 °C. Same flow as #16. A bit too bitter → target ~34–35 s. Next cold start: grind 16 |
 | 27 | 08:18 | 15 | 18.9 | 37.1 | 29 | 1.28 g/s | Flow +25% in 7 min. Drift starting. Less bitter than #26, but harsh (rough, dry mouthfeel = astringent, likely uneven extraction from faster flow). Next: grind 14 (~34–35 s) |
 | 28 | 08:47 | 14 | 18.7 | 43.6 | 25 | 1.74 g/s | Drift faster than one step can follow. Next: grind 10 |
+| 29 | 08:51 | 10 | 19.2 | 38 | 28 | 1.36 g/s | Closer. Next: grind 9 for ~34–35 s |
 
 ### Conclusion: grind drifts coarser as the machine stays on
 - Cold machine at grind 15 gives the reference flow (~1.0–1.1 g/s). After ~1 hour on, the same setting runs at ~1.7–2.3 g/s
