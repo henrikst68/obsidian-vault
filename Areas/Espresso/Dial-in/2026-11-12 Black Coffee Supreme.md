@@ -93,6 +93,23 @@ Grinder purged the night before (empty). 100 g beans put in the hopper. Temp 92 
 
 **Working setting at 11:23 (machine on ~3.5 h): grind 8, 93 °C, ~36 s → ~39 g.** Compare with tomorrow's cold start at grind 15.
 
+## Session 2026-11-14 — cold-start test
+| # | Time | Grind | Dose | Yield | Time | Flow | Note |
+|---|---|---|---|---|---|---|---|
+| 26 | 08:11, cold machine | 15 | 19.0 | 39 | 38 | 1.03 g/s | 100 g in hopper, 93 °C. Same flow as #16. A bit too bitter → target ~34–35 s. Next cold start: grind 16 |
+
+### Conclusion: grind drifts coarser as the machine stays on
+- Cold machine at grind 15 gives the reference flow (~1.0–1.1 g/s). After ~1 hour on, the same setting runs at ~1.7–2.3 g/s
+- Total drift about 7 grind steps over ~3 hours (grind 15 cold ≈ grind 8 after ~3.5 h)
+- On 2026-11-13 the jump appeared about 50 minutes after the machine was turned on
+- Likely mechanism: machine heat warms the grinder housing and burr holder (aluminium or plastic, which expand more than steel) and moves the upper burr, widening the gap. Earlier estimate that only counted steel burr expansion was too small
+- No fault found. Not a beans, hopper, tamp, scale or temperature-setting issue
+
+### Practical settings (Supreme, loaded hopper, 93 °C)
+- First hour after power-on: grind 15, ~35–38 s → ~39 g
+- After 1–3 hours: move finer step by step, toward grind 8 (~36 s → ~39 g at 3.5 h)
+- Optional: map the drift with a shot every 15–20 min at grind 15, logging time since power-on
+
 ### Troubleshooting status (2026-11-13, 11:10)
 All beans today came from the Airscape (same bag). Machine on since ~07:45.
 
