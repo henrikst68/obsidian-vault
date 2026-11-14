@@ -11,6 +11,9 @@ tags:
 
 Back to [[Areas/Espresso/README|Espresso]]
 
+> [!note] Archived 2026-11-14
+> This log is for the Sage Oracle Touch (SES990), which was replaced by a Sage SES995 on 2026-11-14. Grind settings and the grinder drift findings apply to the SES990 only.
+
 ## Beans
 - Black Coffee Roasters **Supreme**, 100% Arabica blend, 900 g bag, roasted in Aarhus
 - Listed notes: caramel, hazelnut, dark chocolate. Intensity 7/10 (medium to medium-dark roast)
