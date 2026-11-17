@@ -49,3 +49,10 @@ No changes were made on the Pi during this diagnosis.
 - Henrik does not recall any change on the Tado side. Most likely Tado changed the home/API (generation) or the legacy fields it still served; the already-running HA process kept its old API object until the container was recreated on 2026-09-21, which forced a fresh setup. Exact flip date unknown (between 2026-07-17 and 2026-09-21).
 - Consequence: the core Tado integration cannot work for this home until HA adds X-line support. Supported path per HA docs = Matter. Matter needs recommissioning of the 10 devices (old fabric key lost).
 - Cleanup: check script and log removed from the Pi, plus my earlier temp copies /tmp/er.json and /tmp/st_m.json.
+
+
+## Update 2026-11-17: after upgrade to HA 2026.11.2
+- Reauth by Henrik at 21:54 worked ("Tado connection established"). The first data fetch fails again, now at another place: `KeyError: 'type'` in `tado/coordinator.py` line 479 (`_async_fetch_heating_circuits`, new code in 2026.11: `zone["type"] == TYPE_HEATING`). On X-line, `get_zones()` returns `roomsAndDevices["rooms"]` (keys roomId, roomName, ...), without `type` or `id`.
+- The same loop as before follows: the refresh token is consumed → HTTP 400 on the retry → HA asks for a new login.
+- Conclusion: HA 2026.11.2 core Tado still has no X-line support. The upgrade did not break Tado; it was already broken (since 2026-09-21). Claude wrongly advised Henrik to reauth today, against open decision 3 above.
+- Tado debug logging still prints the refresh token in plain text in the log.
