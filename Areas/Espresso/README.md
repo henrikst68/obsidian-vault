@@ -13,7 +13,7 @@ Shot parameters, bean notes, grinder settings, and dialing-in logs.
 | 2026-11-17 15:40 | Extended 1 revolution (≈0.74 mm/rev) | 23.6 | 15:46 shot: grind 14, dose fell to 20.5 g (from 22.7 at same grind), 40 g in 24 s — faster |
 
 ## Current setting
-- Black Coffee Roasters Supreme: not yet dialed in on the SES995.
+- Black Coffee Roasters Supreme (2026-11-17): grind 13, tamper screw 23.6 mm, ~21 g → 40 g in ~33 s. Straight: good mouthfeel, some chocolate. Dose varies ±1 g; weigh each shot.
 
 ## Dial-in logs
 ### 2026-11-17 Black Coffee Roasters Supreme (SES995)
@@ -28,7 +28,7 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | 13:54 | 15 | 22.0 | 43 | 1:2.0 | 30 | Americano harsh/astringent |
 | 15:46 | 14 | 20.5 | 40 | 1:2.0 | 24 | (tamper 23.6 mm) |
 | 15:53 | 13 | 22.4 | 30.6 | 1:1.4 | 37 | (tamper 23.6 mm) — slow, near choke |
-| 15:59 | 13 | 21.2 | 40 | 1:1.9 | 33 | (tamper 23.6 mm) — same settings as 15:53; dose −1.2 g |
+| 15:59 | 13 | 21.2 | 40 | 1:1.9 | 33 | (tamper 23.6 mm) — same settings as 15:53; dose −1.2 g. Straight: nice, good mouthfeel, maybe a bit of chocolate |
 
 Notes: grind time cannot be set on the SES995 — the machine sets the dose itself. Dose link to grind and tamper height is NOT confirmed: at 23.6 mm the dose was 20.5 g at grind 14 but 22.4 g at grind 13. Dose appears to vary ±1–2 g shot to shot. Weigh every dose; measure spread with repeated shots at one setting before concluding.
 
