@@ -10,7 +10,7 @@ Shot parameters, bean notes, grinder settings, and dialing-in logs.
 | Date | Change | Screw (mm) | Effect on shots |
 |---|---|---|---|
 | 2026-11-17 | Factory default | 22.86 | — |
-| 2026-11-17 15:40 | Extended 1 revolution (≈0.74 mm/rev) | 23.6 | (to test) |
+| 2026-11-17 15:40 | Extended 1 revolution (≈0.74 mm/rev) | 23.6 | 15:46 shot: grind 14, dose fell to 20.5 g (from 22.7 at same grind), 40 g in 24 s — faster |
 
 ## Current setting
 - Black Coffee Roasters Supreme: not yet dialed in on the SES995.
@@ -26,8 +26,9 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | 10:44 | 16 | 21.5 | 54 | 1:2.5 | 25 | Still bitter |
 | 10:49 | 14 | 22.7 | 44 | 1:1.9 | ~30? | OK, no distinct notes; good as americano |
 | 13:54 | 15 | 22.0 | 43 | 1:2.0 | 30 | Americano harsh/astringent |
+| 15:46 | 14 | 20.5 | 40 | 1:2.0 | 24 | (tamper 23.6 mm) |
 
-Notes: dose follows grind on this machine (finer = fewer grams at the same grind time).
+Notes: grind time cannot be set on the SES995 — the machine sets the dose itself. Dose follows grind (finer = fewer grams) and the tamper height screw (extending 22.86 → 23.6 mm cut the dose from 22.7 to 20.5 g at grind 14; one data point).
 
 ## Archive — Sage Oracle Touch (SES990)
 - [[Archive/Espresso - Sage Oracle Touch SES990/2026-11-12 Black Coffee Supreme|2026-11-12 Black Coffee Supreme]] — shots 1–29 (12–14 Nov). Findings: hopper beans staling, single dose vs loaded hopper, grinder drifting ~7 steps coarser over ~3 h of power-on. Last settings: grind 15 cold, grind 8–10 after 1–3 h, 93 °C, ~19 g → ~39 g.
