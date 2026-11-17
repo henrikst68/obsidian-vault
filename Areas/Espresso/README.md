@@ -7,6 +7,11 @@ Shot parameters, bean notes, grinder settings, and dialing-in logs.
 - Previous machine: Sage Oracle Touch (SES990), replaced 2026-11-14.
 - Tamper height adjustment screw: factory default **22.86 mm** (noted 2026-11-17, before any adjustment).
 
+| Date | Change | Screw (mm) | Effect on shots |
+|---|---|---|---|
+| 2026-11-17 | Factory default | 22.86 | — |
+| 2026-11-17 15:40 | Extended 1 revolution (≈0.74 mm/rev) | 23.6 | (to test) |
+
 ## Current setting
 - Black Coffee Roasters Supreme: not yet dialed in on the SES995.
 
