@@ -5,6 +5,7 @@ Shot parameters, bean notes, grinder settings, and dialing-in logs.
 ## Machine
 - **Sage SES995**, installed 2026-11-14. Not dialed in yet.
 - Previous machine: Sage Oracle Touch (SES990), replaced 2026-11-14.
+- Reference: [[Areas/Espresso/SES995 Machine Reference|SES995 Machine Reference]] (manual + reviews: volumetric stop, Auto Dial-In, purge, tamp height limits)
 - Tamper height adjustment screw: factory default **22.86 mm** (noted 2026-11-17, before any adjustment).
 
 | Date | Change | Screw (mm) | Effect on shots |
@@ -37,6 +38,9 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | ~07:15 | 14 | ? | — | — | — | First shot, cold machine. Choked completely |
 | 07:24 | 18 | 21.4 | 23 | 1:1.1 | 39 | Grind set manually to 18. Still choked (0.59 g/s). Yesterday 10:38 at grind 18 (warm): 49 g in 26 s (1.9 g/s, tamper 22.86 mm) |
 | 19:14 | 20 | 21.6 | 27 | 1:1.25 | 31 | Cold machine (evening). 0.87 g/s, still slow. Grind 20 set by Auto Dial-In. Cold flow ≈ +0.14 g/s per step → ~grind 23 for 1.3 g/s cold. Auto Dial-In stayed at 20 after this shot despite 1:1.25 ratio — it may judge by shot time, not yield (to check: how the shot was stopped). Next: grind 22 set manually |
+| 19:21 | 22 | 19.8 | 41 | 1:2.07 | 28 | 1.46 g/s. Good ratio, slightly fast. Dose fell with coarser grind. Harsh, a bit bitter. Next: grind 21, purge first (machine still warming) |
+
+Pattern across both machines (~40 shots): harshness recurs at many settings; best result only "nice, a bit of chocolate" (2026-11-17 15:59). Beans (Supreme, packed 2026-10-01, ~7 weeks) are outside Sage's 5–20 days window. Test a fresh bag (roasted within 2–3 weeks, roast date on bag) to separate bean age from settings.
 
 Auto Dial-In is ON (does not change grind while idle; only after shots). After the 07:24 shot it moved grind 18 → 20 by itself. From here: no manual grind changes, log the grind Auto Dial-In picks after each shot, to see if it follows the warm-up drift.
 
