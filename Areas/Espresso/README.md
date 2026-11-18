@@ -37,7 +37,7 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | ~07:15 | 14 | ? | — | — | — | First shot, cold machine. Choked completely |
 | 07:24 | 18 | 21.4 | 23 | 1:1.1 | 39 | Grind set manually to 18. Still choked (0.59 g/s). Yesterday 10:38 at grind 18 (warm): 49 g in 26 s (1.9 g/s, tamper 22.86 mm) |
 
-Auto Dial-In is ON (does not change grind while idle; only after shots). Check whether it changes the grind after manual adjustments.
+Auto Dial-In is ON (does not change grind while idle; only after shots). After the 07:24 shot it moved grind 18 → 20 by itself. From here: no manual grind changes, log the grind Auto Dial-In picks after each shot, to see if it follows the warm-up drift.
 
 **Finding: cold machine grinds much finer, same as on the Oracle Touch.** At grind 18, flow cold 0.59 g/s vs warm 1.9 g/s (~3×). Yesterday's warm setting grind 13 → today cold grind 14 choked. Same grinder-on-heated-machine design, same effect. Plan: cold start at ~grind 22, step finer as the machine warms (toward 13–14 when fully warm). Log time of each shot to map the drift.
 
