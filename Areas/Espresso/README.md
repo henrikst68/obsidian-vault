@@ -40,6 +40,12 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | 19:14 | 20 | 21.6 | 27 | 1:1.25 | 31 | Cold machine (evening). 0.87 g/s, still slow. Grind 20 set by Auto Dial-In. Cold flow ≈ +0.14 g/s per step → ~grind 23 for 1.3 g/s cold. Auto Dial-In stayed at 20 after this shot despite 1:1.25 ratio — it may judge by shot time, not yield (to check: how the shot was stopped). Next: grind 22 set manually |
 | 19:21 | 22 | 19.8 | 41 | 1:2.07 | 28 | 1.46 g/s. Good ratio, slightly fast. Dose fell with coarser grind. Harsh, a bit bitter. Next: grind 21, purge first (machine still warming) |
 
+| 19:25 | 22 | ? | 43.5 | — | 20 | 2.18 g/s. Same grind as 19:21, flow +50% in 4 min = warm-up drift. Next: grind 19, purge first |
+
+| 19:29 | 19 | 20.2 | 40.6 | 1:2.01 | 31 | 1.31 g/s. On target |
+
+Practical idea: power on 45–60 min before the first shot (timer or Home Assistant), so shots are pulled on a warm, stable grinder. To check: does standby/auto-off (5–20 min, cannot be disabled) cool the grinder again?
+
 Pattern across both machines (~40 shots): harshness recurs at many settings; best result only "nice, a bit of chocolate" (2026-11-17 15:59). Beans (Supreme, packed 2026-10-01, ~7 weeks) are outside Sage's 5–20 days window. Test a fresh bag (roasted within 2–3 weeks, roast date on bag) to separate bean age from settings.
 
 Auto Dial-In is ON (does not change grind while idle; only after shots). After the 07:24 shot it moved grind 18 → 20 by itself. From here: no manual grind changes, log the grind Auto Dial-In picks after each shot, to see if it follows the warm-up drift.
