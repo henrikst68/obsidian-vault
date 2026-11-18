@@ -36,6 +36,7 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 |---|---|---|---|---|---|---|
 | ~07:15 | 14 | ? | — | — | — | First shot, cold machine. Choked completely |
 | 07:24 | 18 | 21.4 | 23 | 1:1.1 | 39 | Grind set manually to 18. Still choked (0.59 g/s). Yesterday 10:38 at grind 18 (warm): 49 g in 26 s (1.9 g/s, tamper 22.86 mm) |
+| 19:14 | 20 | 21.6 | 27 | 1:1.25 | 31 | Cold machine (evening). 0.87 g/s, still slow. Grind 20 set by Auto Dial-In. Cold flow ≈ +0.14 g/s per step → ~grind 23 for 1.3 g/s cold |
 
 Auto Dial-In is ON (does not change grind while idle; only after shots). After the 07:24 shot it moved grind 18 → 20 by itself. From here: no manual grind changes, log the grind Auto Dial-In picks after each shot, to see if it follows the warm-up drift.
 
