@@ -42,7 +42,7 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 
 | 19:25 | 22 | ? | 43.5 | — | 20 | 2.18 g/s. Same grind as 19:21, flow +50% in 4 min = warm-up drift. Next: grind 19, purge first |
 
-| 19:29 | 19 | 20.2 | 40.6 | 1:2.01 | 31 | 1.31 g/s. On target |
+| 19:29 | 19 | 20.2 | 40.6 | 1:2.01 | 31 | 1.31 g/s. On target. More pleasant, no distinct taste notes → beans likely the limit |
 
 Practical idea: power on 45–60 min before the first shot (timer or Home Assistant), so shots are pulled on a warm, stable grinder. To check: does standby/auto-off (5–20 min, cannot be disabled) cool the grinder again?
 
