@@ -49,7 +49,8 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | Time | Grind | Dose (g) | Out (g) | Ratio | Time (s) | Taste |
 |---|---|---|---|---|---|---|
 | 08:03 | 20 | 22.3 | 22.8 | 1:1.02 | 34 | ~30 min after power-on. Ristretto (0.67 g/s). Good taste. Spent puck: faint screen ring, a few small pits, OK |
-| 08:08 | 22 | 20.1 | 44.2 | 1:2.2 | 24 | 1.84 g/s, a bit fast (coarser + lower dose + warm-up). Next: grind 21 |
+| 08:08 | 22 | 20.1 | 44.2 | 1:2.2 | 24 | 1.84 g/s, a bit fast (coarser + lower dose + warm-up). Spent puck: one clear pinhole right of centre (same spot as pits in 08:03 puck — check shower screen if it repeats). Next: grind 21 |
+| 09:04 | 21 | 20.8 | ~46 | ~1:2.2 | 20 | ~2.3 g/s, gushed. Machine ~1.5 h on, drift continued. Next: grind 19 |
 
 Practical idea: power on 45–60 min before the first shot (timer or Home Assistant), so shots are pulled on a warm, stable grinder. To check: does standby/auto-off (5–20 min, cannot be disabled) cool the grinder again?
 
