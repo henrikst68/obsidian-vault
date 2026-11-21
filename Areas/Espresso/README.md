@@ -12,6 +12,7 @@ Shot parameters, bean notes, grinder settings, and dialing-in logs.
 |---|---|---|---|
 | 2026-11-17 | Factory default | 22.86 | — |
 | 2026-11-17 15:40 | Extended 1 revolution (≈0.74 mm/rev) | 23.6 | 15:46 shot: grind 14, dose fell to 20.5 g (from 22.7 at same grind), 40 g in 24 s — faster |
+| 2026-11-21 19:46 | Extended 1 more revolution (goal: ~18 g dose) | ≈24.3 (to measure) | Expected: dose ~19–20 g, faster flow → grind ~2 steps finer |
 
 ## Current setting
 - Black Coffee Roasters Supreme (2026-11-17): grind 13, tamper screw 23.6 mm, ~21 g → 40 g in ~33 s. Straight: good mouthfeel, some chocolate. Dose varies ±1 g; weigh each shot.
