@@ -44,6 +44,12 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 
 | 19:29 | 19 | 20.2 | 40.6 | 1:2.01 | 31 | 1.31 g/s. On target. More pleasant, no distinct taste notes → beans likely the limit |
 
+### 2026-11-21 Black Coffee Roasters Supreme (SES995), machine on 07:30
+
+| Time | Grind | Dose (g) | Out (g) | Ratio | Time (s) | Taste |
+|---|---|---|---|---|---|---|
+| 08:03 | 20 | 22.3 | 22.8 | 1:1.02 | 34 | ~30 min after power-on. Ristretto (0.67 g/s). Good taste |
+
 Practical idea: power on 45–60 min before the first shot (timer or Home Assistant), so shots are pulled on a warm, stable grinder. To check: does standby/auto-off (5–20 min, cannot be disabled) cool the grinder again?
 
 Pattern across both machines (~40 shots): harshness recurs at many settings; best result only "nice, a bit of chocolate" (2026-11-17 15:59). Beans (Supreme, packed 2026-10-01, ~7 weeks) are outside Sage's 5–20 days window. Test a fresh bag (roasted within 2–3 weeks, roast date on bag) to separate bean age from settings.
