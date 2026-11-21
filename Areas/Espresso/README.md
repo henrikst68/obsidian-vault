@@ -55,6 +55,8 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | 13:25 | 19 | 21.6 | 34.7 | 1:1.6 | 24 | 1.45 g/s — flow right, shot stopped early. For 1:2 run to ~43 g (~30 s) in manual mode. Machine on ~30 min (after being on until ~09:00) |
 | 13:30 | 19 | 20.7 | 43 | 1:2.08 | 23 | 1.87 g/s. Manual mode, stopped on scale. Tastes better than usual, bit of chocolate. Next: grind 18 (drift) |
 
+| 19:50 | 17 | 21.1 | 24.6 | 1:1.17 | 35 | Tamper ≈24.3 mm. 0.70 g/s, too slow. Dose hardly lower after extra turn. Next: grind 20 |
+
 Method that works: manual mode, stop by scale at 1:2.
 
 Note: at ~30 min after power-on, morning (full cold start) grind 20 → 0.67 g/s; afternoon (machine used until ~09:00) grind 19 → 1.45 g/s. Time since power-on is only a reliable reference after a full cold start; after a shorter break the grinder starts partly warm. After short breaks, start near the warm setting.
