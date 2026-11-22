@@ -57,6 +57,12 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 
 | 19:50 | 17 | 21.1 | 24.6 | 1:1.17 | 35 | Tamper ≈24.3 mm. 0.70 g/s, too slow. Dose hardly lower after extra turn. Next: grind 20 |
 
+### 2026-11-22 Black Coffee Roasters Supreme (SES995), tamper ≈24.3 mm
+
+| Time | Grind | Dose (g) | Out (g) | Ratio | Time (s) | Taste |
+|---|---|---|---|---|---|---|
+| 08:06 | 19 | 19.8 | 40.8 | 1:2.06 | 30 | 1.36 g/s. On target. Balanced. Machine on-time to confirm |
+
 Method that works: manual mode, stop by scale at 1:2.
 
 Note: at ~30 min after power-on, morning (full cold start) grind 20 → 0.67 g/s; afternoon (machine used until ~09:00) grind 19 → 1.45 g/s. Time since power-on is only a reliable reference after a full cold start; after a shorter break the grinder starts partly warm. After short breaks, start near the warm setting.
