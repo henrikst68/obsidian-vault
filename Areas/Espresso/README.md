@@ -15,7 +15,10 @@ Shot parameters, bean notes, grinder settings, and dialing-in logs.
 | 2026-11-21 19:46 | Extended 1 more revolution (goal: ~18 g dose) | ≈24.3 (to measure) | Expected: dose ~19–20 g, faster flow → grind ~2 steps finer |
 
 ## Current setting
-- Black Coffee Roasters Supreme (2026-11-17): grind 13, tamper screw 23.6 mm, ~21 g → 40 g in ~33 s. Straight: good mouthfeel, some chocolate. Dose varies ±1 g; weigh each shot.
+- Black Coffee Roasters Supreme (2026-11-22): tamper screw ≈24.3 mm, ~20 g dose, manual mode, stop by scale at 1:2 (~40 g).
+  - ~45 min after cold start: **grind 19** → 40.8 g in 30 s, balanced
+  - ~30 min after cold start: grind 20–21. Machine warm 1.5 h+: go finer (17–18) as the flow speeds up
+  - Dose varies ±1 g; weigh each shot. Purge after grind changes.
 
 ## Dial-in logs
 ### 2026-11-17 Black Coffee Roasters Supreme (SES995)
@@ -61,7 +64,8 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 
 | Time | Grind | Dose (g) | Out (g) | Ratio | Time (s) | Taste |
 |---|---|---|---|---|---|---|
-| 08:06 | 19 | 19.8 | 40.8 | 1:2.06 | 30 | 1.36 g/s. On target. Balanced. Machine on-time to confirm |
+| (earlier) | ? | ? | ? | — | — | First shot of the day, pulled by someone else, not measured |
+| 08:06 | 19 | 19.8 | 40.8 | 1:2.06 | 30 | 1.36 g/s. On target. Balanced. Machine on ~45 min after cold start, 2nd shot of the day |
 
 Method that works: manual mode, stop by scale at 1:2.
 
