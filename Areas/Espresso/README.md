@@ -68,7 +68,8 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | 08:06 | 19 | 19.8 | 40.8 | 1:2.06 | 30 | 1.36 g/s. On target. Balanced. Machine on ~45 min after cold start, 2nd shot of the day |
 | 11:49 | 18 | 20.6 | 39.9 | 1:1.94 | 23 | 1.73 g/s. Ratio right, fast. Machine was off between morning and now (on-time to confirm) → partly warm start after short break, like 2026-11-21 13:25. Next: grind 17 |
 | 11:54 | 17 | 19.4 | ? | — | ? | Spurting and channeling |
-| 11:58 | 17 | 21.5 | 42.3 | 1:1.97 | 32 | 1.32 g/s. On target. Early channeling that stopped once the puck was wet (minor). Same grind as 11:54, only dose differs (+2.1 g) → light dose likely caused channeling. If repeated on light doses, return tamper to ≈23.6 mm |
+| 11:58 | 17 | 21.5 | 42.3 | 1:1.97 | 32 | 1.32 g/s. On target. Early channeling that stopped once the puck was wet (minor).
+| 15:07 | 17 | 20.8 | 33.3 | 1:1.6 | 29 | 1.15 g/s. Auto mode (volumetric stop) → short yield. Machine had been off. Next: grind 17, manual mode, stop at ~41 g | Same grind as 11:54, only dose differs (+2.1 g) → light dose likely caused channeling. If repeated on light doses, return tamper to ≈23.6 mm |
 
 Method that works: manual mode, stop by scale at 1:2.
 
