@@ -66,6 +66,7 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 |---|---|---|---|---|---|---|
 | (earlier) | ? | ? | ? | — | — | First shot of the day, pulled by someone else, not measured |
 | 08:06 | 19 | 19.8 | 40.8 | 1:2.06 | 30 | 1.36 g/s. On target. Balanced. Machine on ~45 min after cold start, 2nd shot of the day |
+| 11:49 | 18 | 20.6 | 39.9 | 1:1.94 | 23 | 1.73 g/s. Ratio right, fast. Machine was off between morning and now (on-time to confirm) → partly warm start after short break, like 2026-11-21 13:25. Next: grind 17 |
 
 Method that works: manual mode, stop by scale at 1:2.
 
