@@ -77,6 +77,7 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | Time | Grind | Dose (g) | Out (g) | Ratio | Time (s) | Taste |
 |---|---|---|---|---|---|---|
 | 07:17 | 20 | 21.7 | 41.3 | 1:1.90 | 40 | 2nd cup of the morning. 1.03 g/s, slow (machine still cool). Keep 20; go 21 if next > 36 s |
+| 16:33 | 19 | 20.6 | 43.5 | 1:2.11 | 23 | After Roast 003–005 tests (machine warm). 1.89 g/s, fast. Next: grind 17 |
 
 Method that works: manual mode, stop by scale at 1:2.
 
