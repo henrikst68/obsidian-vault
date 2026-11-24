@@ -72,6 +72,12 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | 15:07 | 17 | 20.8 | 33.3 | 1:1.6 | 29 | 1.15 g/s. Auto mode (volumetric stop) → short yield. Machine had been off. Next: grind 17, manual mode, stop at ~41 g |
 | 15:11 | 17 | 20.4 | 43.9 | 1:2.15 | 27 | Manual. 1.63 g/s, flow +40% in 4 min (warm-up). Bit sour. Next: grind 16, stop at 41 g | Same grind as 11:54, only dose differs (+2.1 g) → light dose likely caused channeling. If repeated on light doses, return tamper to ≈23.6 mm |
 
+### 2026-11-24 Black Coffee Roasters Supreme (SES995), tamper ≈24.3 mm
+
+| Time | Grind | Dose (g) | Out (g) | Ratio | Time (s) | Taste |
+|---|---|---|---|---|---|---|
+| 07:17 | 20 | 21.7 | 41.3 | 1:1.90 | 40 | 2nd cup of the morning. 1.03 g/s, slow (machine still cool). Keep 20; go 21 if next > 36 s |
+
 Method that works: manual mode, stop by scale at 1:2.
 
 Note: at ~30 min after power-on, morning (full cold start) grind 20 → 0.67 g/s; afternoon (machine used until ~09:00) grind 19 → 1.45 g/s. Time since power-on is only a reliable reference after a full cold start; after a shorter break the grinder starts partly warm. After short breaks, start near the warm setting.
