@@ -85,7 +85,7 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 |---|---|---|---|---|---|---|
 | 08:02 | 20 | 20.8 | 40.1 | 1:1.93 | 38 | ~35 min after power-on. 1.06 g/s, a bit slow |
 | 08:07 | 21 | 19.8 | 44.9 | 1:2.27 | 26 | 1.73 g/s, overshot (dose −1 g + warm-up). Next: grind 20, stop ~40 g |
-| 15:21 | 17 | 22? | 36.8 | ~1:1.67 | 42? | Input "2242" read as 22 g / 42 s (unconfirmed). ~0.88 g/s, slow |
+| 15:21 | 17 | 22 | 36.8 | 1:1.67 | 42 | 0.88 g/s, slow |
 | 15:24 | 18 | 20.6 | 54.1 | 1:2.63 | 34 | 1.59 g/s. Ran long (auto mode?). Next: grind 18, manual, stop at 41 g |
 
 Method that works: manual mode, stop by scale at 1:2.
