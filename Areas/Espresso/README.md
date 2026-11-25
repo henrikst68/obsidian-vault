@@ -79,6 +79,13 @@ Beans look medium roast (not light), matte, one quaker in a handful.
 | 07:17 | 20 | 21.7 | 41.3 | 1:1.90 | 40 | 2nd cup of the morning. 1.03 g/s, slow (machine still cool). Keep 20; go 21 if next > 36 s |
 | 16:33 | 19 | 20.6 | 43.5 | 1:2.11 | 23 | After Roast 003–005 tests (machine warm). 1.89 g/s, fast. Next: grind 17 |
 
+### 2026-11-25 Black Coffee Roasters Supreme (SES995), bag packed ~6 weeks ago (new bag?), tamper ≈24.3 mm
+
+| Time | Grind | Dose (g) | Out (g) | Ratio | Time (s) | Taste |
+|---|---|---|---|---|---|---|
+| 08:02 | 20 | 20.8 | 40.1 | 1:1.93 | 38 | ~35 min after power-on. 1.06 g/s, a bit slow |
+| 08:07 | 21 | 19.8 | 44.9 | 1:2.27 | 26 | 1.73 g/s, overshot (dose −1 g + warm-up). Next: grind 20, stop ~40 g |
+
 Method that works: manual mode, stop by scale at 1:2.
 
 Note: at ~30 min after power-on, morning (full cold start) grind 20 → 0.67 g/s; afternoon (machine used until ~09:00) grind 19 → 1.45 g/s. Time since power-on is only a reliable reference after a full cold start; after a shorter break the grinder starts partly warm. After short breaks, start near the warm setting.
